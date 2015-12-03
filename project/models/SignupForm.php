@@ -38,6 +38,18 @@ class SignupForm extends Model
     }
 
     /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => \Yii::t('app', 'Р›РѕРіРёРЅ'),
+            'email'=>\Yii::t('app', 'email'),
+            'password' =>\Yii::t('app', 'РџР°СЂРѕР»СЊ'),
+        ];
+    }
+
+    /**
      * Signs user up.
      *
      * @return User|null the saved model or null if saving fails
@@ -51,7 +63,7 @@ class SignupForm extends Model
             $user->setPassword($this->password);
             $user->generateAuthKey();
             if ($user->save()) {
-                //связываем пользователя с ролью
+                //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
                 $auth = Yii::$app->authManager;
                 $authorRole = $auth->getRole('client');
                 $auth->assign($authorRole, $user->getId());

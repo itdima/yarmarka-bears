@@ -29,7 +29,7 @@ class SiteController extends Controller
                 'only' => [],
                 'rules' => [
                     [
-                        'actions' => ['index','signup','login'],
+                        'actions' => ['index', 'signup', 'login'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -75,26 +75,27 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-    /**
-     * Logs in a user.
-     *
-     * @return mixed
+    /*
+     * Действие обрабатывающее вход пользователя (ajax)
      */
     public function actionLogin()
     {
-        if (!\Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
+        $request = \Yii::$app->getRequest();
+        if ($request->isPost && $model->load($request->post())) {
+            //\Yii::$app->response->format = Response::FORMAT_JSON;
+            if (!$model->validate()) {
+                return $this->renderAjax('/site/forms/_loginForm', ['model' => $model]);
+            }
+            if ($model->login()){
+                $success=true;
+                return json_encode($success);
+            } else {
+                return $this->renderAjax('/site/forms/_loginForm', ['model' => $model]);
+            }
         }
     }
+
 
     /**
      * Logs out the current user.
@@ -104,7 +105,6 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 
@@ -118,20 +118,20 @@ class SiteController extends Controller
         if (!\Yii::$app->user->can('contact')) {
             throw new \yii\web\ForbiddenHttpException('You are not allowed to access this page');
         }
-            $model = new ContactForm();
-            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-                if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                    Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-                } else {
-                    Yii::$app->session->setFlash('error', 'There was an error sending email.');
-                }
-
-                return $this->refresh();
+        $model = new ContactForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
+                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
             } else {
-                return $this->render('contact', [
-                    'model' => $model,
-                ]);
+                Yii::$app->session->setFlash('error', 'There was an error sending email.');
             }
+
+            return $this->refresh();
+        } else {
+            return $this->render('contact', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**

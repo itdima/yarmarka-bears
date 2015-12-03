@@ -24,15 +24,52 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-
 <div class="wrap">
+    <div class="wrap row">
+        <div class="col-md-9">
+        </div>
+        <div class="col-md-2 text-right">
+            <div id="login">
+                <div class="dropdown row">
+                    <?php if (Yii::$app->user->isGuest) { ?>
+                        <a href="<?= Url::toRoute(['/site/login']); ?>"
+                           class="dropdown-toggle"
+                           data-toggle="dropdown">
+                            <?=\Yii::t('app', 'Войти')?> <span class="caret"></span>
+                        </a>
+                    <?php } else { ?>
+                        <a href="<?= Url::toRoute(['/site/logout']); ?>" data-method="post"><?=\Yii::t('app', 'Выйти')?>
+                            (<?= Yii::$app->user->identity->username; ?>)</a>
+                    <?php } ?>
 
-<?=Yii::$app->language?>
-    <?= \lajax\languagepicker\widgets\LanguagePicker::widget([
-      //  'skin' => \lajax\languagepicker\widgets\LanguagePicker::SKIN_BUTTON,SKIN_DROPDOWN
-        'skin' => \lajax\languagepicker\widgets\LanguagePicker::SKIN_BUTTON,
-        'size' => \lajax\languagepicker\widgets\LanguagePicker::SIZE_SMALL
-    ]); ?>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dLabel">
+                        <li>
+                            <div id="success"></div>
+                            <div id="form_wrap">
+                                <?php
+                                $model = new \app\models\LoginForm();
+                                echo $this->render('/site/forms/_loginForm', ['model' => $model]);
+                                ?>
+                            </div>
+                        </li>
+                        <li role="separator" class="login-divider">
+                            <div>
+                                <a href="<?= Url::toRoute(['/site/signup']); ?>"><?=\Yii::t('app', 'Регистрация')?></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <?= \lajax\languagepicker\widgets\LanguagePicker::widget([
+                //  'skin' => \lajax\languagepicker\widgets\LanguagePicker::SKIN_BUTTON,SKIN_DROPDOWN
+                'skin' => \lajax\languagepicker\widgets\LanguagePicker::SKIN_BUTTON,
+                'size' => \lajax\languagepicker\widgets\LanguagePicker::SIZE_SMALL
+            ]); ?>
+        </div>
+    </div>
+
 
     <!-- Панель меню (navbar) -->
     <div class="navbar-wrapper">
@@ -50,9 +87,8 @@ AppAsset::register($this);
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav nav-pills nav-justified">
 
-
                     <li class="">
-                        <a href="<?= Url::toRoute(['/site/index']); ?>">Главная</a>
+                        <a href="<?= Url::toRoute(['/site/index']); ?>"><?= \Yii::t('app', 'Главная') ?></a>
                     </li>
 
                     <li class="">
@@ -60,22 +96,9 @@ AppAsset::register($this);
                     </li>
 
                     <li class="">
-                        <a href="<?= Url::toRoute(['/site/contact']); ?>">Контакт</a>
+                        <a href="<?= Url::toRoute(['/site/contact']); ?>"><?= \Yii::t('app', 'Контакт') ?></a>
                     </li>
 
-                    <?php if (Yii::$app->user->isGuest) { ?>
-                        <li class="">
-                            <a href="<?= Url::toRoute(['/site/signup']); ?>">Зарегистрироваться</a>
-                        </li>
-                        <li class="">
-                            <a href="<?= Url::toRoute(['/site/login']); ?>">Войти</a>
-                        </li>
-                    <?php } else { ?>
-                        <li class="">
-                            <a href="<?= Url::toRoute(['/site/logout']); ?>" data-method="post">Выйти
-                                (<?= Yii::$app->user->identity->username; ?>)</a>
-                        </li>
-                    <?php } ?>
                 </ul>
             </div>
         </div>
@@ -88,6 +111,7 @@ AppAsset::register($this);
         <?= $content ?>
     </div>
 </div>
+
 
 <footer class="footer">
     <div class="container">

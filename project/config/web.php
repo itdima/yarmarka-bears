@@ -73,7 +73,7 @@ $config = [
                 'class' => 'Swift_SmtpTransport',
                 'username' => 'c11693',
                 'password' => $params['passwordMail'],
-                'host' => 'smtp.c11693.shared.hc.ru',
+                'host' => $params['hostMail'],
                 'port' => '465',
                 'encryption' => 'ssl',
             ]
