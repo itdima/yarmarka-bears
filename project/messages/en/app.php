@@ -4,7 +4,7 @@ return [
     'О нас' =>  'About',
     'Забыли пароль' =>  'Forget password',
     'Пароль'    =>  'Password',
-    'Запомнить'    =>  'Remember me',
+    'Запомнить'    =>  'Remember',
     'Войти'  =>  'Login',
     'Выйти' => 'Logout',
     'Регистрация' => 'Sign up',

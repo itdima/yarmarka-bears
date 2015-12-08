@@ -1,7 +1,16 @@
+@font-face {
+    font-family: Teddy;
+    src: url('../fonts/teddy-bear.ttf');
+}
+
 /* --- Красивый футер --- */
 html,
 body {
     height: 100%;
+    background: #FFF2CF url('../images/background.png') repeat;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 10pt;
+    color: #877850;
 }
 
 .wrap {
@@ -12,35 +21,69 @@ body {
 }
 
 .wrap > .container {
-    padding: 70px 15px 20px;
+    padding: 20px 15px 20px;
 }
 
 .footer {
     height: 60px;
-    background-color: #f5f5f5;
-    border-top: 1px solid #ddd;
+    background-color: transparent;
     padding-top: 20px;
+    font-size: 1.2em;
 }
 
+/*----Общий Дизайн-----*/
+a, a:hover, a:visited {
+    color: #706443;
+}
 
-/* --- Всплывающее окно ЛОГИНА --- */
+h1, h2, h3 {
+    margin: 0em;
+    padding: 0em;
+    text-transform: none;
+    --font-family: 'Oswald', sans-serif;
+    color: #887644;
+}
+
+.divider-bottom {
+    background: url('../images/divider.jpg') repeat-x left bottom;
+}
+
+.divider-top {
+    background: url('../images/divider.jpg') repeat-x left top;
+}
+
+.btn, .btn:hover {
+    background: #766946;
+    border-color: #766946;
+    border-radius: 5px;
+    text-shadow: none;
+    text-decoration: none;
+    text-transform: none;
+    font-size: 0.90em;
+    color: #FFFFFF;
+}
+
+.container:after, .navbar:after {
+    display: none;
+}
+
+/* --- Блок Логина и Языков --- */
+
 #login .dropdown-menu {
     padding-top: 15px;
+    min-width: 205px;
+
 }
 
 #login .dropdown-menu a {
     font-size: 12px;
     padding: 0px;
-    color: #2c7da9;
-    font-size: 12px;
 }
 
 #login .dropdown-menu .login-divider {
     margin: 0px 0 -7px;
     overflow: hidden;
-    background-color: #eff0ef;
     border-top: 1px solid #d9dbdd;
-    border-bottom: 1px solid #8a9099;
     -webkit-border-radius: 0 0 6px 6px;
     -moz-border-radius: 0 0 6px 6px;
     border-radius: 0 0 6px 6px;
@@ -49,7 +92,6 @@ body {
 
 #login .dropdown-menu .login-divider a {
     font-size: 14px;
-    color: #2c7da9;
     border-bottom: dashed 1px #2c7da9;
     display: inline;
     padding: 0px;
@@ -73,4 +115,76 @@ body {
     margin-left: 15px;
     margin-bottom: 0;
 }
+
+/*---Панель меню---*/
+#logo > a {
+    font-family: 'Teddy', arial;
+    font-size: 36px;
+    text-shadow: 4px 4px 4px #aaa;
+    color: #212121;
+}
+
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding: 10px 35px;
+    font-size: 1.25em;
+    color: #2C2C2C;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+    background: #212121;
+    color: #FFFFFF;
+    box-shadow: inset 0px -15px 10px 0px rgba(0, 0, 0, 0.25);
+    text-shadow: none;
+}
+
+.navbar {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.navbar-header:before {
+    display: none;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.navbar-toggle {
+    margin: 0;
+}
+
+/*---Блоки в одну строку*/
+.container-inline {
+    overflow: inherit;
+    width: 100%;
+}
+
+.box-inline {
+    white-space: normal;
+}
+
+.box-inline div {
+    display: inline-block;
+}
+
+/*-----Область контента----*/
+#content a, .footer a{
+    font-style: italic;
+}
+#content{
+    font-size: 1.2em;
+}
+
+
+
+
+
+
+
 

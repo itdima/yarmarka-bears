@@ -3,6 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+
 use yii\helpers\Html;
 use \yii\helpers\Url;
 use yii\bootstrap\NavBar;
@@ -25,86 +26,95 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 <div class="wrap">
-    <div class="wrap row">
-        <div class="col-md-9">
-        </div>
-        <div class="col-md-2 text-right">
+
+    <!-- Login & Languages -->
+    <div class="container-inline">
+        <div class="box-inline text-right">
             <div id="login">
-                <div class="dropdown row">
+                <div class="dropdown">
                     <?php if (Yii::$app->user->isGuest) { ?>
-                        <a href="<?= Url::toRoute(['/site/login']); ?>"
+                        <a href="<?= Url::toRoute(['/user/login']); ?>"
                            class="dropdown-toggle"
                            data-toggle="dropdown">
-                            <?=\Yii::t('app', 'Войти')?> <span class="caret"></span>
+                            <?= \Yii::t('app', 'Войти') ?> <span class="caret"></span>
                         </a>
                     <?php } else { ?>
-                        <a href="<?= Url::toRoute(['/site/logout']); ?>" data-method="post"><?=\Yii::t('app', 'Выйти')?>
+                        <a href="<?= Url::toRoute(['/user/logout']); ?>"
+                           data-method="post"><?= \Yii::t('app', 'Выйти') ?>
                             (<?= Yii::$app->user->identity->username; ?>)</a>
                     <?php } ?>
-
                     <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dLabel">
                         <li>
-                            <div id="success"></div>
                             <div id="form_wrap">
                                 <?php
                                 $model = new \app\models\LoginForm();
-                                echo $this->render('/site/forms/_loginForm', ['model' => $model]);
+                                echo $this->render('/user/forms/_loginForm', ['model' => $model]);
                                 ?>
                             </div>
                         </li>
                         <li role="separator" class="login-divider">
                             <div>
-                                <a href="<?= Url::toRoute(['/site/signup']); ?>"><?=\Yii::t('app', 'Регистрация')?></a>
+                                <a href="<?= Url::toRoute(['/user/signup']); ?>"><?= \Yii::t('app', 'Регистрация') ?></a>
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
-        </div>
-        <div class="col-md-1">
-            <?= \lajax\languagepicker\widgets\LanguagePicker::widget([
-                //  'skin' => \lajax\languagepicker\widgets\LanguagePicker::SKIN_BUTTON,SKIN_DROPDOWN
-                'skin' => \lajax\languagepicker\widgets\LanguagePicker::SKIN_BUTTON,
-                'size' => \lajax\languagepicker\widgets\LanguagePicker::SIZE_SMALL
-            ]); ?>
+            <div>
+                <?= \lajax\languagepicker\widgets\LanguagePicker::widget([
+                    //  'skin' => \lajax\languagepicker\widgets\LanguagePicker::SKIN_BUTTON,SKIN_DROPDOWN
+                    'skin' => \lajax\languagepicker\widgets\LanguagePicker::SKIN_BUTTON,
+                    'size' => \lajax\languagepicker\widgets\LanguagePicker::SIZE_SMALL
+                ]); ?>
+            </div>
         </div>
     </div>
 
-
-    <!-- Панель меню (navbar) -->
-    <div class="navbar-wrapper">
-        <div class="navbar navbar-default" role="navigation" id="navigation">
+    <!-- Navbar -->
+    <div class="navbar navbar-default divider-bottom" role="navigation" id="navigation">
+        <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#navbar"
-                        aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+                <div class="container-inline">
+                    <div class="box-inline">
+                        <div id="logo">
+                            <a class="navbar-brand" href="#">TeddyBears</a>
+                        </div>
+
+                        <div>
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#navbar"
+                                    aria-expanded="false" aria-controls="navbar">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav nav-pills nav-justified">
+            <div class="--container">
+                <div id="navbar" class="navbar-collapse collapse navbar-right">
+                    <ul class="nav nav-pills " id="fornavclick">
+                        <li <?php echo ($this->context->action->id == 'index') ? "class='active'" : "class"; ?>>
+                            <a href="<?= Url::toRoute(['/site/index'], true); ?>"><?= \Yii::t('app', 'Главная') ?></a>
+                        </li>
 
-                    <li class="">
-                        <a href="<?= Url::toRoute(['/site/index']); ?>"><?= \Yii::t('app', 'Главная') ?></a>
-                    </li>
+                        <li <?php echo ($this->context->action->id == 'about') ? "class='active'" : "class"; ?>>
+                            <a href="<?= Url::toRoute(['/site/about'], true); ?>"><?= \Yii::t('app', 'О нас') ?></a>
+                        </li>
 
-                    <li class="">
-                        <a href="<?= Url::toRoute(['/site/about']); ?>"><?= \Yii::t('app', 'О нас') ?></a>
-                    </li>
-
-                    <li class="">
-                        <a href="<?= Url::toRoute(['/site/contact']); ?>"><?= \Yii::t('app', 'Контакт') ?></a>
-                    </li>
-
-                </ul>
+                        <li <?php echo ($this->context->action->id == 'contact') ? "class='active'" : "class"; ?>>
+                            <a href="<?= Url::toRoute(['/site/contact'], true); ?>"><?= \Yii::t('app', 'Контакт') ?></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="container">
+    <!-- Content -->
+    <div id="content" class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
@@ -112,14 +122,24 @@ AppAsset::register($this);
     </div>
 </div>
 
-
-<footer class="footer">
+<!-- Footer-->
+<footer class="footer divider-top">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; TeddyBears <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right">Powered by <a href="#">ITDima</a></p>
     </div>
 </footer>
+
+
+<?php
+$this->registerJs(new \yii\web\JsExpression('
+    $("#fornavclick a").click(function(e){
+        e.preventDefault();
+        document.location.href = $(this).attr("href");
+    })
+'));
+?>
 
 <?php $this->endBody() ?>
 </body>
