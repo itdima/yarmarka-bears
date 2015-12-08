@@ -4,8 +4,7 @@
 # windows thumbnail cache
 Thumbs.db
 
-#Картинки
-/images
+
 
 # composer vendor dir
 /project/vendor
@@ -13,6 +12,6 @@ Thumbs.db
 # composer itself is not needed
 /project/composer.phar
 
-#Настройки
+
 /project/config/db.php
 /project/config/params.php
