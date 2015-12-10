@@ -7,7 +7,7 @@
 html,
 body {
     height: 100%;
-    background: #FFF2CF url('../images/background.png') repeat;
+    background: #FFF2CF url('../images/bg1.png') repeat;
     font-family: Georgia, "Times New Roman", Times, serif;
     font-size: 10pt;
     color: #877850;
@@ -31,6 +31,48 @@ body {
     font-size: 1.2em;
 }
 
+/*--- Боковое всплывающее меню ---*/
+#sidr-toggle {
+    position: fixed;
+    top: 75px;
+}
+
+.sidr {
+    top: 110px !important;
+    height: 275px !important;
+    width: 180px !important;
+    background-image: linear-gradient(#F1E9D3, #D4CAB1) !important;
+    box-shadow: inset 0 0 5px 1px #9E967E !important;
+}
+
+.sidr .sidr-inner {
+    padding: 0 !important;
+}
+
+.sidr h1 {
+    background-image: linear-gradient(#F6EDD4, #9E9478) !important;
+    text-align: center !important;
+    font-size: 14px !important;
+}
+
+.sidr ul {
+    margin: 0 !important;
+    border-top: none !important;
+    border-bottom: none !important;
+}
+
+.sidr ul li {
+    line-height: 40px !important;
+    border-bottom: none !important;
+    border-top: none !important;
+    background: url('../images/divider.jpg') repeat-x left top !important;
+}
+
+
+.sidr ul li:hover > a, .sidr ul li:hover > span, .sidr ul li.active > a, .sidr ul li.active > span, .sidr ul li.sidr-class-active > a, .sidr ul li.sidr-class-active > span {
+    box-shadow: inset 0 0 15px 3px #C7BFA8!important;
+}
+
 /*----Общий Дизайн-----*/
 a, a:hover, a:visited {
     color: #706443;
@@ -52,7 +94,7 @@ h1, h2, h3 {
     background: url('../images/divider.jpg') repeat-x left top;
 }
 
-.btn, .btn:hover {
+.btn, .btn:hover, .btn:active, .btn:focus {
     background: #766946;
     border-color: #766946;
     border-radius: 5px;
@@ -68,6 +110,10 @@ h1, h2, h3 {
 }
 
 /* --- Блок Логина и Языков --- */
+
+.dropdown-menu > li > a, .dropdown-menu > li > a:hover, .dropdown-menu > li > a:visited {
+    color: #877850;
+}
 
 #login .dropdown-menu {
     padding-top: 15px;
@@ -92,7 +138,7 @@ h1, h2, h3 {
 
 #login .dropdown-menu .login-divider a {
     font-size: 14px;
-    border-bottom: dashed 1px #2c7da9;
+    border-bottom: dashed 1px #877850;
     display: inline;
     padding: 0px;
     text-decoration: none;
@@ -114,6 +160,11 @@ h1, h2, h3 {
     margin-right: 15px;
     margin-left: 15px;
     margin-bottom: 0;
+}
+
+.language-picker{
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 /*---Панель меню---*/
@@ -174,10 +225,11 @@ h1, h2, h3 {
 }
 
 /*-----Область контента----*/
-#content a, .footer a{
+#content a, .footer a {
     font-style: italic;
 }
-#content{
+
+#content {
     font-size: 1.2em;
 }
 

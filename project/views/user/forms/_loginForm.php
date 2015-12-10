@@ -24,7 +24,7 @@ $form = ActiveForm::begin([
 <div class="form-inline">
     <?= $form->field($model, 'rememberMe')->checkbox()->label(\Yii::t('app', 'Запомнить')) ?>
     <div>
-        <?= Html::submitButton(\Yii::t('app', 'Войти'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+        <?= Html::submitButton(\Yii::t('app', 'Войти'), ['class' => 'btn', 'name' => 'login-button']) ?>
         <i id="spinner" class="fa fa-spinner fa-pulse hidden"></i>
     </div>
 
