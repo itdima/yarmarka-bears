@@ -11,4 +11,11 @@ return [
     'Логин' => 'Username',
     'Главная' => 'Home',
     'Контакт' => 'Contact',
+    'Меню' => 'Menu',
+    'Каталог'=>'Catalog',
+    'Мастера'=>'Masters',
+    'Блоги'=>'Blogs',
+    'Мишки'=>'Bears',
+    'Куклы'=>'Dolls',
+    'Материалы'=>'Materials'
 ];

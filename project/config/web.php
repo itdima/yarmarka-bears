@@ -18,7 +18,7 @@ $config = [
     'components' => [
         'languagepicker' => [
             'class' => 'lajax\languagepicker\Component',
-            'languages' => ['en', 'ru'],         // List of available languages (icons only)
+            'languages' => ['en'=>'English', 'ru'=>'Русский'],         // List of available languages (icons only)
         ],
         'i18n' => [
             'translations' => [
