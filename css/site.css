@@ -94,9 +94,9 @@ h1, h2, h3 {
     background: url('../images/divider.jpg') repeat-x left top;
 }
 
-.btn, .btn:hover, .btn:active, .btn:focus {
-    background: #766946;
-    border-color: #766946;
+.btn {
+    background-color: #766946;
+    border-color: #A3997E;
     border-radius: 5px;
     text-shadow: none;
     text-decoration: none;
@@ -105,9 +105,42 @@ h1, h2, h3 {
     color: #FFFFFF;
 }
 
+.btn:hover, .btn:focus, .btn:active {
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.2);
+    color: #FFFFFF;
+    background-color: #766946;
+    outline: none !important;
+}
+
 .container:after, .navbar:after {
     display: none;
 }
+
+.breadcrumb {
+    background-color: transparent;
+    margin-bottom: 0;
+}
+
+/*----Элементы формы-----*/
+.form-control:active, .form-control:focus {
+    border-color: #A3997E;
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.2);
+}
+.has-success .form-control:focus{
+    box-shadow:none;
+    color:inherit;
+    border: 1px solid #ccc;
+}
+
+.has-success .form-control{
+    box-shadow:none;
+    color:inherit;
+    border: 1px solid #ccc;
+}
+.has-success .control-label{
+    color:inherit;
+}
+
 
 /* --- Блок Логина и Языков --- */
 

@@ -121,6 +121,12 @@ echo Sidr::widget([
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="logout-dropdown">
                             <li>
+                                <a href="<?= Url::toRoute(['/user/cabinet']); ?>" data-method="post">
+                                    <?= \Yii::t('app', 'Личный кабинет') ?>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
                                 <a href="<?= Url::toRoute(['/user/logout']); ?>" data-method="post">
                                     <?= \Yii::t('app', 'Выйти') ?>
                                 </a>
@@ -190,9 +196,11 @@ echo Sidr::widget([
 
     <!-- Content -->
     <div id="content" class="--container">
+        <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
+        </div>
         <?= $content ?>
     </div>
 
