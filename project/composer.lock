@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "94077c19e1adc080f4cbcc64fd63677b",
-    "content-hash": "3277994c4cf4dc67518fc7117e5ee94a",
+    "hash": "d74ec002ac446a41b5264bcfe69c7ff2",
+    "content-hash": "2d5dc201ee6c0e83502ba7e9f48e7253",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -457,6 +457,52 @@
                 "yii2"
             ],
             "time": "2015-09-01 16:53:13"
+        },
+        {
+            "name": "mdmsoft/yii2-captcha",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mdmsoft/yii2-captcha.git",
+                "reference": "e4dc975a83f2e777f7a1ea96f52b06d544cabe81"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mdmsoft/yii2-captcha/zipball/e4dc975a83f2e777f7a1ea96f52b06d544cabe81",
+                "reference": "e4dc975a83f2e777f7a1ea96f52b06d544cabe81",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "mdm\\captcha\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Misbahul D Munir",
+                    "email": "misbahuldmunir@gmail.com"
+                }
+            ],
+            "description": "Captcha with math equation",
+            "keywords": [
+                "captcha",
+                "math",
+                "yii2"
+            ],
+            "time": "2014-11-02 15:19:09"
         },
         {
             "name": "phpspec/php-diff",

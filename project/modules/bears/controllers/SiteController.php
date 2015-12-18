@@ -1,22 +1,14 @@
 <?php
-namespace app\controllers;
+namespace app\modules\bears\controllers;
 
 use Yii;
-use app\models\LoginForm;
-use app\models\PasswordResetRequestForm;
-use app\models\ResetPasswordForm;
-use app\models\SignupForm;
-use app\models\ContactForm;
-use yii\base\InvalidParamException;
-use yii\web\BadRequestHttpException;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
+use app\modules\bears\models\ContactForm;
+
 
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends \app\controllers\CommonController
 {
 
     /**
@@ -28,10 +20,12 @@ class SiteController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
+            /*
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+            */
         ];
     }
 

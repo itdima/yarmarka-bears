@@ -6,13 +6,16 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log', 'languagepicker'],
-    // 'defaultRoute' => 'main',
+    'defaultRoute' => 'common/index',
     'language' => 'ru-RU',
     // 'layout' => 'main',
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Module',
             'layout' => 'main',
+        ],
+        'bears' => [
+            'class' => 'app\modules\bears\Module',
         ],
     ],
     'components' => [
@@ -57,12 +60,12 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'loginUrl' => ['site/login'],
+            'loginUrl' => ['common/login'],
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'common/error',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',

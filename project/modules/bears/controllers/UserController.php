@@ -1,23 +1,40 @@
 <?php
-namespace app\controllers;
+namespace app\modules\bears\controllers;
 
 use Yii;
-use app\models\LoginForm;
-use app\models\PasswordResetRequestForm;
-use app\models\ResetPasswordForm;
-use app\models\SignupForm;
-use app\models\ContactForm;
+use app\modules\bears\models\LoginForm;
+use app\modules\bears\models\PasswordResetRequestForm;
+use app\modules\bears\models\ResetPasswordForm;
+use app\modules\bears\models\SignupForm;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
  * Site controller
  */
-class UserController extends Controller
+class UserController extends \app\controllers\CommonController
 {
+
+    /**
+     * @inheritdoc
+     */
+    public function actions()
+    {
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ],
+            'captcha' => [
+                'class' => 'yii\captcha\CaptchaAction',
+                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+                'minLength' => 5,
+                'maxLength' => 5,
+                'transparent' => true,
+            ],
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -29,7 +46,7 @@ class UserController extends Controller
                 'only' => [],
                 'rules' => [
                     [
-                        'actions' => ['signup', 'login', 'request-password-reset'],
+                        'actions' => ['signup', 'login', 'request-password-reset', 'captcha'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -78,7 +95,7 @@ class UserController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-        return $this->goHome();
+        parent::actionRefresh();
     }
 
     /**

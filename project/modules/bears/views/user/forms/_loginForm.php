@@ -18,7 +18,7 @@ $form = ActiveForm::begin([
 <?= $form->field($model, 'username')->textInput(['placeholder' => 'email'])->label(false) ?>
 <?= $form->field($model, 'password')->passwordInput(['placeholder' => \Yii::t('app', 'Пароль')])->label(false) ?>
 <div class="form-group">
-    <?= Html::a( \Yii::t('app', 'Забыли пароль'), ['/user/request-password-reset']) ?>
+    <?= Html::a( \Yii::t('app', 'Забыли пароль'), ['user/request-password-reset']) ?>
 </div>
 
 <div class="form-inline">
@@ -38,19 +38,19 @@ $("#login-form").on("submit", function (e) {
  e.preventDefault();
  var form = $(this);
   $.ajax({
-   url: "' .  Url::toRoute(['/user/login']) . '",
+   url: "' .  Url::toRoute(['user/login']) . '",
    type: "POST",
    data: form.serialize(),
    beforeSend: function () {
         $("#spinner").removeClass("hidden");
     },
    success: function (result) {
-        $("#spinner").addClass("hidden");
         if (result == "true"){
             location.reload();
         } else {
             $("#form_wrap").html(result);
         }
+        $("#spinner").addClass("hidden");
    },
   });
 });

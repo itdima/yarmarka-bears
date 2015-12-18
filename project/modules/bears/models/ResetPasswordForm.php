@@ -1,5 +1,5 @@
 <?php
-namespace app\models;
+namespace app\modules\bears\models;
 
 use app\models\User;
 use yii\base\InvalidParamException;
