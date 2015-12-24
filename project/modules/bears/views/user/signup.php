@@ -9,7 +9,7 @@
 $this->title = \Yii::t('app', 'Регистрация');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="container">
+
 
     <div class="row">
         <div class="col-lg-5">
@@ -19,4 +19,4 @@ $this->params['breadcrumbs'][] = $this->title;
             ?>
         </div>
     </div>
-</div>
+

@@ -12,7 +12,7 @@ $this->title = 'My Yii Application';
 <?php
 $this->registerJs(new \yii\web\JsExpression('
     //jQuery.sidr("open","sidr-menu");
-    $("#open-menu").click();'),
+    $(".sidr-selector").click();'),
     \yii\web\View::POS_LOAD
 );
 ?>

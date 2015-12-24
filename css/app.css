@@ -1,0 +1,140 @@
+@font-face {
+    font-family: Teddy;
+    src: url('../fonts/teddy-bear.ttf');
+}
+
+/* --- Красивый футер --- */
+html,
+body {
+    height: 100%;
+    background: #56423e url('../images/bg_app.jpg') repeat;
+    font-size: 12pt;
+    line-height: 2em;
+    font-family: Georgia, serif;
+    color: #d5d0cf;
+}
+
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+
+.wrap > .container {
+    padding: 20px 15px 20px;
+}
+
+.footer {
+    height: 60px;
+    background-color: transparent;
+    padding-top: 15px;
+    font-size: 1.2em;
+    color: #896F6A;
+}
+
+.footer a {
+    color: #997F7A;
+}
+
+/*-----Меню----*/
+
+#logo a {
+    color: #fff;
+    font-size: 3em;
+    font-family: Bitter, serif;
+    text-shadow: 0px 2px 1px #36221e;
+    font-weight: bold;
+    --text-transform: lowercase;
+}
+
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    font-size: 1em;
+    color: #f1f0f0;
+    text-shadow: 0px 2px 1px #36221e;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+    background: transparent;
+    color: #FFFFFF;
+    box-shadow: inset 0px -15px 10px 0px rgba(0, 0, 0, 0.25);
+    text-shadow: none;
+}
+
+.navbar {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.navbar-header:before {
+    display: none;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.navbar-toggle {
+    margin: 0;
+}
+
+#navigation {
+    padding-top: 30px;
+}
+
+#lang-picker a{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/*-----Область контента----*/
+#content a, .footer a {
+    font-style: italic;
+}
+
+#content {
+    font-size: 1.2em;
+}
+
+#content .data-block-dark {
+     padding: 10px;
+     background: #886963 url('../images/bg_app_div.jpg');
+     color: #f3efef;
+     border: solid 1px #967B76;
+     text-shadow: 0px 1px 1px #583933;
+ }
+#content .data-block-light {
+   padding: 10px;
+    background: #b09792 url('../images/bg_app_div_light.jpg');
+    color: #f3efef;
+    border: solid 1px #967B76;
+    text-shadow: 0px 1px 1px #583933;
+
+}
+#content a{
+    text-decoration: none;
+}
+#content img{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width:230px;
+    height: 300px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

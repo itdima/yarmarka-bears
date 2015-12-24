@@ -7,10 +7,13 @@
 html,
 body {
     height: 100%;
-    background: #FFF2CF url('../images/bg1.png') repeat;
+    background: #FFF2CF url('../images/bears/bg_bears.png') repeat;
     font-family: Georgia, "Times New Roman", Times, serif;
     font-size: 10pt;
     color: #877850;
+}
+body{
+    padding-top: 90px;
 }
 
 .wrap {
@@ -32,13 +35,16 @@ body {
 }
 
 /*--- Боковое всплывающее меню ---*/
-#sidr-toggle {
-    position: fixed;
-    top: 75px;
+.sidr-selector{
+    margin-left: 5px;
+}
+
+.fa-indent,.fa-outdent{
+    padding-top: 10px;
 }
 
 .sidr {
-    top: 110px !important;
+    top: 80px !important;
     height: 275px !important;
     width: 180px !important;
     background-image: linear-gradient(#F1E9D3, #D4CAB1) !important;
@@ -68,12 +74,14 @@ body {
     background: url('../images/divider.jpg') repeat-x left top !important;
 }
 
-
 .sidr ul li:hover > a, .sidr ul li:hover > span, .sidr ul li.active > a, .sidr ul li.active > span, .sidr ul li.sidr-class-active > a, .sidr ul li.sidr-class-active > span {
-    box-shadow: inset 0 0 15px 3px #C7BFA8!important;
+    box-shadow: inset 0 0 15px 3px #C7BFA8 !important;
 }
 
 /*----Общий Дизайн-----*/
+
+
+
 a, a:hover, a:visited {
     color: #706443;
 }
@@ -126,21 +134,22 @@ h1, h2, h3 {
     border-color: #A3997E;
     box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.2);
 }
-.has-success .form-control:focus{
-    box-shadow:none;
-    color:inherit;
+
+.has-success .form-control:focus {
+    box-shadow: none;
+    color: inherit;
     border: 1px solid #ccc;
 }
 
-.has-success .form-control{
-    box-shadow:none;
-    color:inherit;
+.has-success .form-control {
+    box-shadow: none;
+    color: inherit;
     border: 1px solid #ccc;
 }
-.has-success .control-label{
-    color:inherit;
-}
 
+.has-success .control-label {
+    color: inherit;
+}
 
 /* --- Блок Логина и Языков --- */
 
@@ -155,7 +164,7 @@ h1, h2, h3 {
 }
 
 #login .dropdown-menu a {
-    font-size: 12px;
+    --font-size: 12px;
     padding: 0px;
 }
 
@@ -170,13 +179,19 @@ h1, h2, h3 {
 }
 
 #login .dropdown-menu .login-divider a {
-    font-size: 14px;
+    --font-size: 14px;
     border-bottom: dashed 1px #877850;
     display: inline;
     padding: 0px;
     text-decoration: none;
 }
 
+#lang-picker a {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/*
 #login .dropdown-menu:before {
     position: absolute;
     top: -7px;
@@ -188,24 +203,48 @@ h1, h2, h3 {
     border-bottom-color: rgba(0, 0, 0, 0.2);
     content: '';
 }
-
+*/
 #login .form-horizontal .form-group {
     margin-right: 15px;
     margin-left: 15px;
     margin-bottom: 0;
 }
 
-.language-picker{
+.language-picker {
     margin-left: 10px;
     margin-right: 10px;
 }
 
 /*---Панель меню---*/
-#logo > a {
+#logo > a.hidden-xs {
     font-family: 'Teddy', arial;
     font-size: 36px;
     text-shadow: 4px 4px 4px #aaa;
     color: #212121;
+    margin-left: -40px;
+    margin-right: 30px;
+}
+
+#logo > a.visible-xs {
+    font-family: 'Teddy', arial;
+    font-size: 32px;
+    text-shadow: 4px 4px 4px #aaa;
+    color: #212121;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+
+.wrap-nav {
+    margin-right: 0;
+    margin-left: 0;
+    margin-top: 10px;
+    --background: #FFF2CF url('../images/bears/bg_bears.png') repeat;
+}
+
+.col-nav{
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .nav > li > a {
@@ -228,6 +267,8 @@ h1, h2, h3 {
 .navbar {
     background-color: transparent;
     border-color: transparent;
+    margin-bottom: 0;
+
 }
 
 .navbar-header:before {

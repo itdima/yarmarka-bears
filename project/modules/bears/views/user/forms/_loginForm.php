@@ -21,13 +21,14 @@ $form = ActiveForm::begin([
     <?= Html::a( \Yii::t('app', 'Забыли пароль'), ['user/request-password-reset']) ?>
 </div>
 
-<div class="form-inline">
+<div class="row">
+    <div class="col-xs-6">
     <?= $form->field($model, 'rememberMe')->checkbox()->label(\Yii::t('app', 'Запомнить')) ?>
-    <div>
+        </div>
+    <div class="col-xs-6">
         <?= Html::submitButton(\Yii::t('app', 'Войти'), ['class' => 'btn', 'name' => 'login-button']) ?>
         <i id="spinner" class="fa fa-spinner fa-pulse hidden"></i>
     </div>
-
 </div>
 <?php ActiveForm::end(); ?>
 

@@ -18,8 +18,9 @@ class BearsAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/bears.css',
         'css/font-awesome.min.css',
+        'css/bears.css',
+
     ];
     public $js = [
         'js/bears.js',

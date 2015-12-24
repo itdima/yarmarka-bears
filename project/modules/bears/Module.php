@@ -20,6 +20,10 @@ class Module extends \yii\base\Module
             'identityCookie' => ['name' => 'bears', 'httpOnly' => true],
             'idParam' => 'bears_id',
         ]);
+        Yii::$app->set('languagepicker', [
+            'class' => 'lajax\languagepicker\Component',
+            'languages' => ['en', 'ru'],
+        ]);
 
 
     }
