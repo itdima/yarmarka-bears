@@ -8,8 +8,6 @@ use yii\helpers\Html;
 use \yii\helpers\Url;
 use app\assets\AppAsset;
 
-use raoul2000\widget\sidr\SidrAsset;
-use raoul2000\widget\sidr\Sidr;
 
 AppAsset::register($this);
 ?>
@@ -77,7 +75,9 @@ AppAsset::register($this);
     <!-- Content -->
     <div id="content" class="container">
         <?= $content ?>
+
     </div>
+
 
 </div>
 
@@ -88,7 +88,6 @@ AppAsset::register($this);
         <p class="pull-right">Powered by <a href="#">ITDima</a></p>
     </div>
 </footer>
-
 
 <?php $this->endBody() ?>
 </body>
