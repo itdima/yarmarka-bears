@@ -37,8 +37,8 @@ echo Sidr::widget([
     'pluginOptions' => [
         'name' => 'sidr',
         'source' => '#sidr',
-        'body' => '#content',
-        'displace' => true,
+        //'body' => '#content',
+        'displace' => false,
         'onClose' => new yii\web\JsExpression('
             function() {
                 $(".sidr-selector").html("<i class=\"fa fa-indent fa-2x\"></i>");

@@ -37,6 +37,9 @@ class Module extends \yii\base\Module
         //language
         Yii::$app->languagepicker->languages = ['en', 'ru'];
 
+        //DB
+      //  Yii::$app->db->tablePrefix = 'bears_';
+
         //error
         Yii::$app->errorHandler->errorAction = 'bears/site/error';
 

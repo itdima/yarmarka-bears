@@ -39,7 +39,6 @@ class SiteController extends \app\controllers\CommonController
         return $this->render('index');
     }
 
-
     /**
      * Displays contact page.
      *

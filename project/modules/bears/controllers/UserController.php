@@ -1,12 +1,15 @@
 <?php
 namespace app\modules\bears\controllers;
 
+
+use app\modules\bears\models\User;
 use Yii;
 use app\modules\bears\models\LoginForm;
 use app\modules\bears\models\PasswordResetRequestForm;
 use app\modules\bears\models\ResetPasswordForm;
 use app\modules\bears\models\SignupForm;
 use yii\base\InvalidParamException;
+use yii\db\ActiveRecord;
 use yii\web\BadRequestHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -159,12 +162,31 @@ class UserController extends \app\controllers\CommonController
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
             Yii::$app->session->setFlash('success', 'New password was saved.');
-
             return $this->goHome();
         }
 
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * Displays cabinet page.
+     *
+     * @return mixed
+     */
+    public function actionCabinet()
+    {
+        /*
+        if (!\Yii::$app->user->can('contact')) {
+            throw new \yii\web\ForbiddenHttpException('You are not allowed to access this page');
+        }
+        */
+        $user = new User();
+        if (Yii::$app->request->isPost && Yii::$app->request->post('User')){
+            $user->setAttr(Yii::$app->user->id,Yii::$app->request->post('User'));
+        }
+        $user=$user->findOne(Yii::$app->user->id);
+        return $this->render('cabinet',['model'=>$user]);
     }
 }
