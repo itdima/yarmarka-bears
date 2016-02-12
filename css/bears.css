@@ -291,6 +291,36 @@ h1, h2, h3 {
     margin: 0;
 }
 
+/*---Меню кабинета----*/
+
+.profile-nav-menu{
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 20px;
+    --background-color: #F1E8D0;
+    background-image: linear-gradient(#F1E9D3, #D4CAB1)
+}
+.profile-nav-menu > .nav-pills > li > a {
+     color: #2C2C2C;
+    font-style: normal!important;
+ }
+
+
+.profile-nav-menu a:hover {
+    font-size:1.1em;
+    --font-weight: bold;
+}
+
+.profile-nav-menu > .nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+    color: #2C2C2C;
+    --font-weight: bold;
+    font-style: italic!important;
+    font-size:1.1em;
+    background-color: transparent;
+}
 /*---Блоки в одну строку*/
 .container-inline {
     overflow: inherit;

@@ -8,9 +8,10 @@ use yii\helpers\Html;
 use \yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 use app\modules\bears\assets\BearsAsset;
-
 use raoul2000\widget\sidr\SidrAsset;
 use raoul2000\widget\sidr\Sidr;
+
+
 
 
 BearsAsset::register($this);

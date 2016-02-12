@@ -68,7 +68,7 @@ class SignupForm extends Model
     public function signup()
     {
         if ($this->validate()) {
-            $user = new \app\modules\bears\models\User();
+            $user = new \app\models\User();
             $user->username = $this->username;
             $user->email = $this->email;
             $user->setPassword($this->password);

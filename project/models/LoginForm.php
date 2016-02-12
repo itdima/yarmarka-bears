@@ -1,8 +1,7 @@
 <?php
 
-namespace app\modules\bears\models;
+namespace app\models;
 
-use app\models\User;
 use Yii;
 use yii\base\Model;
 
@@ -30,18 +29,6 @@ class LoginForm extends Model
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'username' => 'email',
-            'rememberMe'=>\Yii::t('app', 'Запомнить'),
-            'password' =>\Yii::t('app', 'Пароль'),
         ];
     }
 
@@ -85,6 +72,7 @@ class LoginForm extends Model
         if ($this->_user === false) {
             $this->_user = User::findByUsername($this->username);
         }
+
         return $this->_user;
     }
 }

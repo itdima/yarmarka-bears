@@ -4,7 +4,6 @@
 $config = [
     'layout'=>'main',
     'defaultRoute' => 'site/index',
-
     'components' => [
 
     ],

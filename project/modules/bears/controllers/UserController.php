@@ -2,6 +2,9 @@
 namespace app\modules\bears\controllers;
 
 
+
+use app\models\Country;
+use app\modules\bears\models\UserProfile;
 use app\modules\bears\models\User;
 use Yii;
 use app\modules\bears\models\LoginForm;
@@ -13,6 +16,8 @@ use yii\db\ActiveRecord;
 use yii\web\BadRequestHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\UploadedFile;
+
 
 /**
  * Site controller
@@ -182,11 +187,21 @@ class UserController extends \app\controllers\CommonController
             throw new \yii\web\ForbiddenHttpException('You are not allowed to access this page');
         }
         */
-        $user = new User();
-        if (Yii::$app->request->isPost && Yii::$app->request->post('User')){
-            $user->setAttr(Yii::$app->user->id,Yii::$app->request->post('User'));
+        $profile = UserProfile::getProfile(Yii::$app->user->id);
+        $name_lang = 'name_'.Yii::$app->language;
+        $country = Country::find()->select([$name_lang,'alpha'])->all();
+        $arr=[];
+        foreach ($country as $c){
+            $arr[$c['alpha']] = $c[$name_lang];
         }
-        $user=$user->findOne(Yii::$app->user->id);
-        return $this->render('cabinet',['model'=>$user]);
+        if (Yii::$app->request->isPost && $profile->load(Yii::$app->request->post())){
+            $profile->images = UploadedFile::getInstance($profile, 'images');
+            if ($profile->images){
+                $profile->removeImages();
+                $profile->uploadImage($profile->images);
+            }
+            $profile->save();
+        }
+        return $this->render('cabinet',['model'=>$profile,'country'=>$arr]);
     }
 }

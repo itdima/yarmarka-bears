@@ -1,24 +1,31 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\file\FileInput;
 use yii\web\JsExpression;
+use kartik\file\FileInput;
+use kartik\icons\Icon;
+use kartik\select2\Select2;
 ?>
 
+<?php
 
-<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);?>
+
+?>
+
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
 <div class="row">
     <div class="col-md-3">
 
         <?php
-        echo $form->field($model, 'images[]')->label(false)->widget(FileInput::classname(), [
+
+        echo $form->field($model, 'images')->label(false)->widget(FileInput::classname(), [
             'options' => [
                 'multiple' => false,
                 'accept' => 'image/*',
             ],
             'pluginOptions' => [
-                'overwriteInitial'=> true,
+                'overwriteInitial' => true,
                 'maxFileSize' => 100,
                 'allowedPreviewTypes' => ['image'],
                 'allowedFileTypes' => ['image'],
@@ -30,17 +37,19 @@ use yii\web\JsExpression;
                 'browseIcon' => '<i class="fa fa-camera"></i>',
                 //'browseLabel' => 'Select Photo',
                 'defaultPreviewContent' => [
-                    '<div class="file-preview-frame"> '.
-                    Html::img(Yii::getAlias('@web') . '/images/placeholder.jpg', ['class' => 'file-preview-image', 'alt' => '', 'title' => ''])
-                    .'</div>'
+                    //    '<div class="file-preview-frame"> '.
+                    //    Html::img(Yii::getAlias('@web') . '/images/placeholder.jpg', ['class' => 'file-preview-image', 'alt' => '', 'title' => ''])
+                    //    .'</div>'
                 ],
 
                 'initialPreview' => [
-                    Html::img(Yii::getAlias('@web') . '/images/placeholder.jpg', ['class' => 'file-preview-image', 'alt' => '', 'title' => '']),
+                    Html::img($model->getImage()->getUrl(), ['class' => 'file-preview-image', 'alt' => '', 'title' => ''])
+
+
                 ],
 
                 'previewFileIcon' => [
-                    Html::img(Yii::getAlias('@web') . '/images/placeholder.jpg', ['class' => 'file-preview-image', 'alt' => '', 'title' => '']),
+                    //   Html::img(Yii::getAlias('@web') . '/images/placeholder.jpg', ['class' => 'file-preview-image', 'alt' => '', 'title' => '']),
                 ],
 
                 'layoutTemplates' => [
@@ -57,12 +66,12 @@ use yii\web\JsExpression;
                     */
                 ],
                 'previewTemplates' => [
-                    'image'=>'
+                    'image' => '
                         <div class="file-preview-frame" id="{previewId}" data-fileindex="{fileindex}">
                             <img src="{data}" class="file-preview-image" title="{caption}" alt="{caption}"  STYLE_SETTING >
                         </div>
                     ',
-                    'other'=>'
+                    'other' => '
                         <div class="file-preview-frame{frameClass}" id="{previewId}" data-fileindex="{fileindex}" title="{caption}" STYLE_SETTING >
                             <div class="file-preview-other-frame">
                                 <div style="border:none;opacity: 1;" class="file-preview-other">
@@ -81,10 +90,34 @@ use yii\web\JsExpression;
         ?>
     </div>
     <div class="col-md-9">
-        <?= $form->field($model, 'about')->textarea(['placeholder' => 'About','style'=>'height:185px;'])->label(false) ?>
+
+
+        <?= $form->field($model, 'about')->textarea(['placeholder' => 'About', 'style' => 'height:125px;'])->label(false) ?>
+
+        <?php
+        Icon::map($this, Icon::FI);
+        $format = "function format(state) {if (!state.id) return state.text; return '<span class=\'flag-icon flag-icon-'+state.id+' \'></span>  ' + state.text;}";
+        echo $form->field($model, 'country')->label(false)->widget(Select2::classname(),[
+            'name' => 'state_10',
+            'data' => $country,
+            'options' => [
+                'placeholder' => Yii::t('app','Выберите страну...'),
+                'multiple' => false,
+            ],
+            'pluginOptions' => [
+                'width'=>'200px',
+                'templateResult' =>new JsExpression("$format"),
+                'templateSelection' => new JsExpression("$format"),
+                'escapeMarkup' => new JsExpression("function(m) { return m; }"),
+            ],
+        ]);
+        ?>
+
+
         <?= Html::submitButton(\Yii::t('app', 'Сохранить'), ['class' => 'btn']) ?>
     </div>
 
 </div>
 
 <?php ActiveForm::end(); ?>
+
