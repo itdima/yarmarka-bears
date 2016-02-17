@@ -82,7 +82,7 @@ body{
 
 
 
-a, a:hover, a:visited {
+a:not(.btn), a:hover:not(.btn), a:visited:not(.btn) {
     color: #706443;
 }
 
@@ -336,7 +336,7 @@ h1, h2, h3 {
 }
 
 /*-----Область контента----*/
-#content a, .footer a {
+#content a:not(.btn), .footer a {
     font-style: italic;
 }
 

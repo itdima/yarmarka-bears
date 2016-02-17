@@ -10,6 +10,7 @@ use yii\widgets\Breadcrumbs;
 use app\modules\bears\assets\BearsAsset;
 use raoul2000\widget\sidr\SidrAsset;
 use raoul2000\widget\sidr\Sidr;
+use timurmelnikov\widgets\ShowLoading;
 
 
 
@@ -32,6 +33,7 @@ BearsAsset::register($this);
 
 <!-- Всплывающее боковое меню -->
 <?php
+echo ShowLoading::widget(['loadingType' => 1]);
 SidrAsset::$theme = SidrAsset::THEME_LIGHT;
 echo Sidr::widget([
     'selector' => '.sidr-selector',

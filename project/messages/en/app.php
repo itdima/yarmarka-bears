@@ -22,6 +22,7 @@ return [
     'Повторите пароль'=>'Repeat password',
     'Код подтверждения'=>'Verification code',
     'Выберите страну...'=>'Select country...',
+    'Добавить работу'=>'Add craft',
     //Ошибки
     'Введенные пароли должны совпадать'=>'Repeat password must be repeated exactly.'
 ];

@@ -180,7 +180,7 @@ class UserController extends \app\controllers\CommonController
      *
      * @return mixed
      */
-    public function actionCabinet()
+    public function actionCabinet($item=null,$id=null)
     {
         /*
         if (!\Yii::$app->user->can('contact')) {
@@ -191,6 +191,7 @@ class UserController extends \app\controllers\CommonController
         $name_lang = 'name_'.Yii::$app->language;
         $country = Country::find()->select([$name_lang,'alpha'])->all();
         $arr=[];
+        $data='';
         foreach ($country as $c){
             $arr[$c['alpha']] = $c[$name_lang];
         }
@@ -202,6 +203,13 @@ class UserController extends \app\controllers\CommonController
             }
             $profile->save();
         }
-        return $this->render('cabinet',['model'=>$profile,'country'=>$arr]);
+        if ($item && $id){
+            $data = $this->run($item.'/'.$id);
+        }
+
+        return $this->render('cabinet',['model'=>$profile,'country'=>$arr, 'data' => $data]);
     }
+
+
+
 }
