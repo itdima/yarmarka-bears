@@ -4,6 +4,8 @@ namespace app\modules\bears\controllers;
 
 
 use app\models\Country;
+use app\modules\bears\controllers\cabinet\CraftsController;
+use app\modules\bears\models\Crafts;
 use app\modules\bears\models\UserProfile;
 use app\modules\bears\models\User;
 use Yii;
@@ -187,27 +189,36 @@ class UserController extends \app\controllers\CommonController
             throw new \yii\web\ForbiddenHttpException('You are not allowed to access this page');
         }
         */
-        $profile = UserProfile::getProfile(Yii::$app->user->id);
-        $name_lang = 'name_'.Yii::$app->language;
-        $country = Country::find()->select([$name_lang,'alpha'])->all();
-        $arr=[];
-        $data='';
-        foreach ($country as $c){
-            $arr[$c['alpha']] = $c[$name_lang];
-        }
-        if (Yii::$app->request->isPost && $profile->load(Yii::$app->request->post())){
-            $profile->images = UploadedFile::getInstance($profile, 'images');
-            if ($profile->images){
-                $profile->removeImages();
-                $profile->uploadImage($profile->images);
-            }
-            $profile->save();
-        }
-        if ($item && $id){
-            $data = $this->run($item.'/'.$id);
-        }
 
-        return $this->render('cabinet',['model'=>$profile,'country'=>$arr, 'data' => $data]);
+            $profile = UserProfile::getProfile(Yii::$app->user->id);
+            $name_lang = 'name_' . Yii::$app->language;
+            $country = Country::find()->select([$name_lang, 'alpha'])->all();
+            $arr = [];
+            $data = '';
+            foreach ($country as $c) {
+                $arr[$c['alpha']] = $c[$name_lang];
+            }
+            //Фотография и информация о пользователе
+            if (!$item && !$id && Yii::$app->request->isPost && $profile->load(Yii::$app->request->post())) {
+                $profile->images = UploadedFile::getInstance($profile, 'images');
+                if ($profile->images) {
+                    $profile->removeImages();
+                    $profile->uploadImage($profile->images);
+                }
+                $profile->save();
+            }
+
+            if ($item && $id) {
+                if (Yii::$app->request->isGet){
+                    Yii::$app->assetManager->bundles['kartik\form\ActiveFormAsset'] = false;
+                }
+                if (Yii::$app->request->isPost){
+                    self::setPostParams(Yii::$app->request->post());
+                }
+                $data = $this->run('cabinet/' . $item . '/' . $id);
+            }
+
+            return $this->render('cabinet', ['model' => $profile, 'country' => $arr, 'data' => $data]);
     }
 
 

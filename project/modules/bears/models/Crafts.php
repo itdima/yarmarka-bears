@@ -53,6 +53,8 @@ class Crafts extends \yii\db\ActiveRecord
         return [
             [['user'], 'integer'],
             [['price'], 'number'],
+            [['title','price','images','currency'],'required'],
+            [['currency'], 'string', 'max' => 3],
             [['title'], 'string', 'max' => 255],
             [['description'], 'string', 'max' => 1024],
             [['created_at','updated_at'],'safe'],
@@ -71,6 +73,7 @@ class Crafts extends \yii\db\ActiveRecord
             'description' => 'Description',
             'price' => 'Price',
             'images' => 'Photo',
+            'currency' => 'Currency'
         ];
     }
 

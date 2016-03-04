@@ -7,7 +7,7 @@ use yii\web\JsExpression;
 
 $form = ActiveForm::begin([
     'id' => 'login-form',
-    'options' => ['class' => 'form-horizontal'],
+    //'options' => ['class' => 'form-horizontal'],
     //'enableAjaxValidation' => true,
     'enableClientValidation' => false,
    // 'action' => Url::to(['']),

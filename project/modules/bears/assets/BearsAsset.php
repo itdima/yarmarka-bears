@@ -20,15 +20,15 @@ class BearsAsset extends AssetBundle
     public $css = [
         'css/font-awesome.min.css',
         'css/bears.css',
-
+       // 'css/fromasset/activeform.min.css'
     ];
     public $js = [
         'js/bears.js',
+      // 'js/fromasset/activeform.min.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
-
     ];
 }

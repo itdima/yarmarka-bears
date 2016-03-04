@@ -80,7 +80,10 @@ body{
 
 /*----Общий Дизайн-----*/
 
-
+div.required label:after {
+    content: " *";
+    color: red;
+}
 
 a:not(.btn), a:hover:not(.btn), a:visited:not(.btn) {
     color: #706443;
@@ -152,7 +155,6 @@ h1, h2, h3 {
 }
 
 /* --- Блок Логина и Языков --- */
-
 .dropdown-menu > li > a, .dropdown-menu > li > a:hover, .dropdown-menu > li > a:visited {
     color: #877850;
 }
@@ -160,7 +162,6 @@ h1, h2, h3 {
 #login .dropdown-menu {
     padding-top: 15px;
     min-width: 205px;
-
 }
 
 #login .dropdown-menu a {

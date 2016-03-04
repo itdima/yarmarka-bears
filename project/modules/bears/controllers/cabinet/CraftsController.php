@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\bears\controllers;
+namespace app\modules\bears\controllers\cabinet;
 
 use app\modules\bears\models\Crafts;
 use Yii;
@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
  */
 class CraftsController extends \app\controllers\CommonController
 {
+
     public function behaviors()
     {
         return [
@@ -35,7 +36,7 @@ class CraftsController extends \app\controllers\CommonController
         $crafts = Crafts::find()
             ->where('user = :user', [':user' => Yii::$app->user->id])
             ->all();
-        return $this->renderPartial('index', ['model' => $crafts]);
+        return $this->renderAjax('index', ['model' => $crafts]);
     }
 
 
@@ -47,12 +48,21 @@ class CraftsController extends \app\controllers\CommonController
     public function actionAdd()
     {
         $model = new Crafts();
-
-        return $this->renderPartial('create', [
+        if (\Yii::$app->request->isPost && $model->load(self::getPostParams())) {
+            $model->user = Yii::$app->user->id;
+            if ($model->save()) {
+                return $this->renderAjax('index', [
+                    'model' => $model,
+                ]);
+            }
+        }
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
 
     }
+
+
 
     /**
      * Updates an existing Products model.

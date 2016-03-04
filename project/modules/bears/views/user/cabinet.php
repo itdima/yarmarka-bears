@@ -7,6 +7,7 @@ use \yii\helpers\Html;
 use \yii\helpers\Url;
 use \yii\widgets\Pjax;
 
+
 ?>
 
 
@@ -39,6 +40,7 @@ echo $this->render('/user/forms/_profileForm', ['model' => $model,'country'=>$co
         </div>
     </div>
     <div class="col-md-9">
+
         <?php Pjax::begin([
             'id'=>'profile-content',
             'linkSelector'=>'[pjax-link=1]',
@@ -49,10 +51,13 @@ echo $this->render('/user/forms/_profileForm', ['model' => $model,'country'=>$co
               //  'type'=>'GET',
             ],
             'options'=>[
-                'aaa'=>'bbb',
             ]
         ]); ?>
-        <?=isset($data)?$data:'';?>
+
+        <?php
+        echo isset($data)?$data:'';
+        //var_dump($data);
+        ?>
         <?php Pjax::end(); ?>
     </div>
 </div>
@@ -60,6 +65,7 @@ echo $this->render('/user/forms/_profileForm', ['model' => $model,'country'=>$co
 
 
 <?php
+
 
 $script = <<<JS
 $(document).on('pjax:send', function() {
@@ -71,6 +77,8 @@ $(document).on('pjax:complete', function() {
 JS;
 $this->registerJs($script);
 
+\yii\widgets\MaskedInputAsset::register($this);
+
 /*
 $this->registerJs(new \yii\web\JsExpression('
     $("#cabinet-menu a").click(function(e){
@@ -81,3 +89,5 @@ $this->registerJs(new \yii\web\JsExpression('
 */
 
 ?>
+
+

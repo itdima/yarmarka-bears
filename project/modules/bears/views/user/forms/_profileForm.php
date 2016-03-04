@@ -5,6 +5,7 @@ use yii\web\JsExpression;
 use kartik\file\FileInput;
 use kartik\icons\Icon;
 use kartik\select2\Select2;
+
 ?>
 
 <?php
@@ -92,29 +93,33 @@ use kartik\select2\Select2;
     <div class="col-md-9">
 
 
-        <?= $form->field($model, 'about')->textarea(['placeholder' => 'About', 'style' => 'height:125px;'])->label(false) ?>
+        <?= $form->field($model, 'about')->textarea(['placeholder' => 'About', 'style' => 'height:170px;'])->label(false) ?>
+        <div class="row divider-bottom">
+            <div class="col-sm-3">
+                <?php
+                Icon::map($this, Icon::FI);
+                $format = "function format(state) {if (!state.id) return state.text; return '<span class=\'flag-icon flag-icon-'+state.id+' \'></span>  ' + state.text;}";
+                echo $form->field($model, 'country')->label(false)->widget(Select2::classname(), [
+                    'name' => 'state_10',
+                    'data' => $country,
+                    'options' => [
+                        'placeholder' => Yii::t('app', 'Выберите страну...'),
+                        'multiple' => false,
+                    ],
+                    'pluginOptions' => [
+                        'width' => '200px',
+                        'templateResult' => new JsExpression("$format"),
+                        'templateSelection' => new JsExpression("$format"),
+                        'escapeMarkup' => new JsExpression("function(m) { return m; }"),
+                    ],
+                ]);
+                ?>
 
-        <?php
-        Icon::map($this, Icon::FI);
-        $format = "function format(state) {if (!state.id) return state.text; return '<span class=\'flag-icon flag-icon-'+state.id+' \'></span>  ' + state.text;}";
-        echo $form->field($model, 'country')->label(false)->widget(Select2::classname(),[
-            'name' => 'state_10',
-            'data' => $country,
-            'options' => [
-                'placeholder' => Yii::t('app','Выберите страну...'),
-                'multiple' => false,
-            ],
-            'pluginOptions' => [
-                'width'=>'200px',
-                'templateResult' =>new JsExpression("$format"),
-                'templateSelection' => new JsExpression("$format"),
-                'escapeMarkup' => new JsExpression("function(m) { return m; }"),
-            ],
-        ]);
-        ?>
-
-
-        <?= Html::submitButton(\Yii::t('app', 'Сохранить'), ['class' => 'btn']) ?>
+            </div>
+            <div class="col-sm-2">
+                <?= Html::submitButton(\Yii::t('app', 'Сохранить'), ['class' => 'btn']) ?>
+            </div>
+        </div>
     </div>
 
 </div>
