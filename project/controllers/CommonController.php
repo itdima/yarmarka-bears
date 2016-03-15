@@ -11,8 +11,6 @@ use yii\web\Controller;
 class CommonController extends Controller
 {
 
-    private static $postParams;
-
     public function actions()
     {
         return [
@@ -42,22 +40,7 @@ class CommonController extends Controller
     {
         return $this->render('index');
     }
-//======Общие функции=======
-    /*
-     * Set POST параметров для передачи в другие контроллеры
-     */
-    public static function setPostParams($params)
-    {
-        self::$postParams = $params;
-    }
 
-    /*
-     * Get POST параметров для передачи в другие контроллеры
-     */
-    public static function getPostParams()
-    {
-        return self::$postParams;
-    }
 
 
 }

@@ -8,12 +8,14 @@ use kartik\select2\Select2;
 
 ?>
 
-<?php
 
-
-?>
-
-<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin([
+    'id' => 'profile-form',
+    'options' => [
+        'enctype' => 'multipart/form-data',
+        'data-pjax' => true,
+    ],
+]); ?>
 
 <div class="row">
     <div class="col-md-3">
@@ -117,7 +119,11 @@ use kartik\select2\Select2;
 
             </div>
             <div class="col-sm-2">
-                <?= Html::submitButton(\Yii::t('app', 'Сохранить'), ['class' => 'btn']) ?>
+
+                <?= Html::button(
+                    \Yii::t('app', 'Сохранить'),
+                    ['class' => 'btn', 'name' => 'add-button', 'id' => 'profile-form-submit']
+                ) ?>
             </div>
         </div>
     </div>
@@ -126,3 +132,12 @@ use kartik\select2\Select2;
 
 <?php ActiveForm::end(); ?>
 
+<?php
+$this->registerJs(new \yii\web\JsExpression('
+    $("#profile-form-submit").on("click", function (e) {
+        e.preventDefault();
+        $("#profile-form").submit();
+    });
+'));
+
+?>

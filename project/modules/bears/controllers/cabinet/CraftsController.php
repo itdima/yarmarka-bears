@@ -7,6 +7,7 @@ use Yii;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 
 /**
@@ -33,10 +34,10 @@ class CraftsController extends \app\controllers\CommonController
      */
     public function actionIndex()
     {
-        $crafts = Crafts::find()
+        $models = Crafts::find()
             ->where('user = :user', [':user' => Yii::$app->user->id])
             ->all();
-        return $this->renderAjax('index', ['model' => $crafts]);
+        return $this->renderAjax('index', ['models' => $models]);
     }
 
 
@@ -48,17 +49,35 @@ class CraftsController extends \app\controllers\CommonController
     public function actionAdd()
     {
         $model = new Crafts();
-        if (\Yii::$app->request->isPost && $model->load(self::getPostParams())) {
+        //POST
+        if (\Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
             $model->user = Yii::$app->user->id;
             if ($model->save()) {
+                $model->images = UploadedFile::getInstances($model, 'images');
+                foreach ($model->images as $image) {
+                    $model->uploadImage($image,'uploads');
+                }
+
+                $this->redirect(Url::toRoute(['user/cabinet','item'=>'crafts','id'=>'index']));
                 return $this->renderAjax('index', [
                     'model' => $model,
                 ]);
             }
         }
-        return $this->renderAjax('create', [
-            'model' => $model,
-        ]);
+        //PJAX
+        if (\Yii::$app->request->isPjax){
+            return $this->renderAjax('create', [
+                'model' => $model,
+            ]);
+
+        }
+
+        //GET
+        if (\Yii::$app->request->isGet){
+            return $this->renderPartial('create', ['model' => $model,]);
+        }
+
+
 
     }
 

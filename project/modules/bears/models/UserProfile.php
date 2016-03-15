@@ -17,11 +17,8 @@ use Yii;
  *
  * @property User $idUser
  */
-class UserProfile extends \yii\db\ActiveRecord
+class UserProfile extends commonModel
 {
-    //const prefix = 'bears';
-    public $images;
-
 
 
     /**
@@ -62,23 +59,6 @@ class UserProfile extends \yii\db\ActiveRecord
 
 
     /**
-     * @return array
-     */
-    public function behaviors()
-    {
-        return [
-            'image' => [
-                'class' => '\rico\yii2images\behaviors\ImageBehave',
-            ],
-            'timestamp' => [
-                'class' => \yii\behaviors\TimestampBehavior::className(),
-                'value' => new \yii\db\Expression('NOW()'),
-            ],
-        ];
-    }
-
-
-    /**
      * @return \yii\db\ActiveQuery
      */
     public function getIdUser()
@@ -101,20 +81,7 @@ class UserProfile extends \yii\db\ActiveRecord
         return $profile;
     }
 
-    /**
-     * Прикрепление изображения к модели
-     * @return image
-     */
-    public function uploadImage($image)
-    {
-        $tempName = Yii::$app->basePath . '/temp_uploads/' . Yii::$app->security->generateRandomString() .'.'. $image->extension;
-        $image->saveAs($tempName);
-        $uploadedImage = $this->attachImage($tempName);
-        if ($uploadedImage && file_exists($tempName)) {
-            unlink($tempName);
-        }
-        return $uploadedImage;
-    }
+
 
 
 }

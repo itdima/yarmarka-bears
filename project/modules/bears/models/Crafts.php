@@ -15,10 +15,8 @@ use Yii;
  *
  * @property BearsUserProfile $user0
  */
-class Crafts extends \yii\db\ActiveRecord
+class Crafts extends commonModel
 {
-    public $images;
-
     /**
      * @inheritdoc
      */
@@ -30,22 +28,6 @@ class Crafts extends \yii\db\ActiveRecord
 
 
     /**
-     * @return array
-     */
-    public function behaviors()
-    {
-        return [
-            'image' => [
-                'class' => '\rico\yii2images\behaviors\ImageBehave',
-            ],
-            'timestamp' => [
-                'class' => \yii\behaviors\TimestampBehavior::className(),
-                'value' => new \yii\db\Expression('NOW()'),
-            ],
-        ];
-    }
-
-    /**
      * @inheritdoc
      */
     public function rules()
@@ -53,10 +35,11 @@ class Crafts extends \yii\db\ActiveRecord
         return [
             [['user'], 'integer'],
             [['price'], 'number'],
-            [['title','price','images','currency'],'required'],
+            [['title','price','currency'],'required'],
             [['currency'], 'string', 'max' => 3],
             [['title'], 'string', 'max' => 255],
             [['description'], 'string', 'max' => 1024],
+            [['images'], 'file', 'maxFiles' => 5],
             [['created_at','updated_at'],'safe'],
         ];
     }
@@ -84,4 +67,6 @@ class Crafts extends \yii\db\ActiveRecord
     {
         return $this->hasOne(BearsUserProfile::className(), ['id_user' => 'user']);
     }
+
+
 }

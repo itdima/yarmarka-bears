@@ -11,12 +11,21 @@ use \yii\widgets\Pjax;
 ?>
 
 
-<?php
-// Url::toRoute(['site/about'], true);
-
-echo $this->render('/user/forms/_profileForm', ['model' => $model,'country'=>$country]);
-
-?>
+<div id="profile-form-loading"></div>
+<?php Pjax::begin([
+    'id'=>'profile-form-block',
+   //'linkSelector'=>'[pjax-link=1]',
+    'timeout'=>'10000',
+    //'enablePushState' => true,
+    //'enableReplaceState' => true,
+    'clientOptions'=>[
+        //  'type'=>'GET',
+    ],
+    'options'=>[
+    ]
+]); ?>
+<?php echo $this->render('/user/forms/_profileForm', ['model' => $model,'country'=>$country]);?>
+<?php Pjax::end(); ?>
 
 <div class="row">
     <div class="col-md-3">
@@ -42,9 +51,9 @@ echo $this->render('/user/forms/_profileForm', ['model' => $model,'country'=>$co
     <div class="col-md-9">
 
         <?php Pjax::begin([
-            'id'=>'profile-content',
+            'id'=>'profile-content-block',
             'linkSelector'=>'[pjax-link=1]',
-            'timeout'=>'5000',
+            'timeout'=>'10000',
             //'enablePushState' => true,
             //'enableReplaceState' => true,
             'clientOptions'=>[
@@ -54,9 +63,9 @@ echo $this->render('/user/forms/_profileForm', ['model' => $model,'country'=>$co
             ]
         ]); ?>
 
+        <div id="profile-content-loading"></div>
         <?php
         echo isset($data)?$data:'';
-        //var_dump($data);
         ?>
         <?php Pjax::end(); ?>
     </div>
@@ -68,16 +77,25 @@ echo $this->render('/user/forms/_profileForm', ['model' => $model,'country'=>$co
 
 
 $script = <<<JS
-$(document).on('pjax:send', function() {
-  $('#profile-content').showLoading();
+
+$('#profile-content-block').on('pjax:send', function(event) {
+  $('#profile-content-loading').showLoading();
 })
-$(document).on('pjax:complete', function() {
-  $('#profile-content').hideLoading();
+$('#profile-content-block').on('pjax:complete', function() {
+  $('#profile-content-loading').hideLoading();
+})
+
+$('#profile-form-block').on('pjax:send', function(event) {
+  $('#profile-form-loading').showLoading();
+})
+$('#profile-form-block').on('pjax:complete', function() {
+  $('#profile-form-loading').hideLoading();
 })
 JS;
 $this->registerJs($script);
 
 \yii\widgets\MaskedInputAsset::register($this);
+
 
 /*
 $this->registerJs(new \yii\web\JsExpression('

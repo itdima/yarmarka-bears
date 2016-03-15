@@ -105,6 +105,8 @@ h1, h2, h3 {
     background: url('../images/divider.jpg') repeat-x left top;
 }
 
+
+
 .btn {
     background-color: #766946;
     border-color: #A3997E;
@@ -114,6 +116,7 @@ h1, h2, h3 {
     text-transform: none;
     font-size: 0.90em;
     color: #FFFFFF;
+    font-size: 14px;
 }
 
 .btn:hover, .btn:focus, .btn:active {
@@ -122,6 +125,13 @@ h1, h2, h3 {
     background-color: #766946;
     outline: none !important;
 }
+
+.btn-fileinput{
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
 
 .container:after, .navbar:after {
     display: none;
@@ -239,7 +249,7 @@ h1, h2, h3 {
 .wrap-nav {
     margin-right: 0;
     margin-left: 0;
-    margin-top: 10px;
+    --margin-top: 10px;
     background: #FFF2CF url('../images/bears/bg_bears.png') repeat;
 }
 .wrap-nav > .divider-bottom{

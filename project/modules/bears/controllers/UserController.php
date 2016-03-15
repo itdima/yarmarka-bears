@@ -177,6 +177,7 @@ class UserController extends \app\controllers\CommonController
         ]);
     }
 
+
     /**
      * Displays cabinet page.
      *
@@ -198,27 +199,22 @@ class UserController extends \app\controllers\CommonController
             foreach ($country as $c) {
                 $arr[$c['alpha']] = $c[$name_lang];
             }
+
             //Фотография и информация о пользователе
-            if (!$item && !$id && Yii::$app->request->isPost && $profile->load(Yii::$app->request->post())) {
+            if (Yii::$app->request->isPjax && Yii::$app->request->post('UserProfile') && $profile->load(Yii::$app->request->post())) {
                 $profile->images = UploadedFile::getInstance($profile, 'images');
                 if ($profile->images) {
                     $profile->removeImages();
-                    $profile->uploadImage($profile->images);
+                    $profile->uploadImage($profile->images,'uploads');
                 }
                 $profile->save();
+                return $this->renderAjax('forms/_profileForm', ['model' => $profile,'country'=>$arr]);
             }
-
             if ($item && $id) {
-                if (Yii::$app->request->isGet){
-                    Yii::$app->assetManager->bundles['kartik\form\ActiveFormAsset'] = false;
-                }
-                if (Yii::$app->request->isPost){
-                    self::setPostParams(Yii::$app->request->post());
-                }
                 $data = $this->run('cabinet/' . $item . '/' . $id);
             }
 
-            return $this->render('cabinet', ['model' => $profile, 'country' => $arr, 'data' => $data]);
+            return $this->render('cabinet', ['model' => $profile, 'country' => $arr, 'data'=>$data]);
     }
 
 
