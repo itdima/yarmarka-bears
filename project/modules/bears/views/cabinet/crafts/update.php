@@ -1,15 +1,12 @@
 <?php
-
-use yii\helpers\Html;
-
-
+$this->title = \Yii::t('app', 'Редактировать');
+$this->params['breadcrumbs'][] = ['label' => \Yii::t('app', 'Работы'), 'url' => ['cabinet/crafts/index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="products-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+        <?= $this->render('forms/_form', [
+            'model' => $model,
+        ]) ?>
 
-</div>
+

@@ -3,12 +3,12 @@ namespace app\modules\bears\controllers;
 
 
 
-use app\models\Country;
+
 use app\modules\bears\controllers\cabinet\CraftsController;
 use app\modules\bears\models\Crafts;
-use app\modules\bears\models\UserProfile;
+
 use app\modules\bears\models\User;
-use Yii;
+
 use app\modules\bears\models\LoginForm;
 use app\modules\bears\models\PasswordResetRequestForm;
 use app\modules\bears\models\ResetPasswordForm;
@@ -24,7 +24,7 @@ use yii\web\UploadedFile;
 /**
  * Site controller
  */
-class UserController extends \app\controllers\CommonController
+class UserController extends CommonController
 {
 
     /**
@@ -176,47 +176,5 @@ class UserController extends \app\controllers\CommonController
             'model' => $model,
         ]);
     }
-
-
-    /**
-     * Displays cabinet page.
-     *
-     * @return mixed
-     */
-    public function actionCabinet($item=null,$id=null)
-    {
-        /*
-        if (!\Yii::$app->user->can('contact')) {
-            throw new \yii\web\ForbiddenHttpException('You are not allowed to access this page');
-        }
-        */
-
-            $profile = UserProfile::getProfile(Yii::$app->user->id);
-            $name_lang = 'name_' . Yii::$app->language;
-            $country = Country::find()->select([$name_lang, 'alpha'])->all();
-            $arr = [];
-            $data = '';
-            foreach ($country as $c) {
-                $arr[$c['alpha']] = $c[$name_lang];
-            }
-
-            //Фотография и информация о пользователе
-            if (Yii::$app->request->isPjax && Yii::$app->request->post('UserProfile') && $profile->load(Yii::$app->request->post())) {
-                $profile->images = UploadedFile::getInstance($profile, 'images');
-                if ($profile->images) {
-                    $profile->removeImages();
-                    $profile->uploadImage($profile->images,'uploads');
-                }
-                $profile->save();
-                return $this->renderAjax('forms/_profileForm', ['model' => $profile,'country'=>$arr]);
-            }
-            if ($item && $id) {
-                $data = $this->run('cabinet/' . $item . '/' . $id);
-            }
-
-            return $this->render('cabinet', ['model' => $profile, 'country' => $arr, 'data'=>$data]);
-    }
-
-
 
 }

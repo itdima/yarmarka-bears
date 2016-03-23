@@ -27,7 +27,8 @@
         "kartik-v/yii2-icons": "v1.4.1",
         "kartik-v/yii2-widget-select2": "v2.0.7",
         "timurmelnikov/yii2-showloading": "0.1.1",
-        "kartik-v/yii2-widget-activeform": "v1.4.7"
+        "kartik-v/yii2-widget-activeform": "v1.4.7",
+        "kotchuprik/yii2-fotorama-widget": "1.0"
 
     },
     "require-dev": {

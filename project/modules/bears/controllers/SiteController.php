@@ -8,7 +8,7 @@ use app\modules\bears\models\ContactForm;
 /**
  * Site controller
  */
-class SiteController extends \app\controllers\CommonController
+class SiteController extends CommonController
 {
 
     /**

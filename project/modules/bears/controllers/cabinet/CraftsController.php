@@ -8,14 +8,12 @@ use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use rico\yii2images\models\Image;
 
 
-/**
- * ProductsController implements the CRUD actions for Products model.
- */
-class CraftsController extends \app\controllers\CommonController
-{
 
+class CraftsController extends \app\modules\bears\controllers\CommonController {
+    public $layout = '_cabinet.php';
     public function behaviors()
     {
         return [
@@ -28,77 +26,104 @@ class CraftsController extends \app\controllers\CommonController
         ];
     }
 
+    private function getAllCrafts()
+    {
+        return Crafts::find()
+            ->where('user = :user', [':user' => Yii::$app->user->id])
+            ->all();
+    }
+
     /**
      * Lists all Products models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $models = Crafts::find()
-            ->where('user = :user', [':user' => Yii::$app->user->id])
-            ->all();
-        return $this->renderAjax('index', ['models' => $models]);
+        return $this->render('index', ['models' => $this->getAllCrafts()]);
     }
 
 
     /**
-     * Creates a new Products model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * Creates a new Craft model.
      * @return mixed
      */
     public function actionAdd()
     {
         $model = new Crafts();
-        //POST
         if (\Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
             $model->user = Yii::$app->user->id;
             if ($model->save()) {
                 $model->images = UploadedFile::getInstances($model, 'images');
                 foreach ($model->images as $image) {
-                    $model->uploadImage($image,'uploads');
+                    $model->uploadImage($image, 'uploads');
                 }
-
-                $this->redirect(Url::toRoute(['user/cabinet','item'=>'crafts','id'=>'index']));
-                return $this->renderAjax('index', [
-                    'model' => $model,
-                ]);
+                $this->setFlash(\Yii::t('app','Сохранено успешно'));
+            } else {
+                $this->setFlash(\Yii::t('app','Извините, во время сохранения произошла ошибка'), 'warning', 'glyphicon glyphicon-remove-sign');
             }
         }
-        //PJAX
-        if (\Yii::$app->request->isPjax){
-            return $this->renderAjax('create', [
-                'model' => $model,
-            ]);
-
-        }
-
-        //GET
-        if (\Yii::$app->request->isGet){
-            return $this->renderPartial('create', ['model' => $model,]);
-        }
-
-
-
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
 
-
     /**
-     * Updates an existing Products model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * Updates an existing Craft model.
+     * @param integer $p
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($item)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($item);
+        //POST
+        if (\Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
+            //$model->user = Yii::$app->user->id;
+            if ($model->save()) {
+                $model->images = UploadedFile::getInstances($model, 'images');
+                foreach ($model->images as $image) {
+                    $model->uploadImage($image, 'uploads');
+                }
+                $this->setFlash(\Yii::t('app','Сохранено успешно'));
+            } else {
+                $this->setFlash(\Yii::t('app','Извините, во время сохранения произошла ошибка'), 'warning', 'glyphicon glyphicon-remove-sign');
+            }
+        }
+        return $this->render('update', [
+            'model' => $model,
+        ]);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+    }
+
+    /**
+     * Delete image of Craft model.
+     * @return mixed
+     */
+    public function actionDeleteImage()
+    {
+        if (Yii::$app->request->isAjax && Yii::$app->request->post('key', -1) >= 0) {
+            $image = Image::findOne((int)Yii::$app->request->post('key'));
+            $model = Crafts::findOne((int)Yii::$app->request->post('idmodel'));
+            if ($model){
+                $model->removeImage($image);
+                //Если изображение главное - меняем его
+                $newMainImg = Image::find()
+                    ->where('itemId = :idmodel',[':idmodel'=>$model->id])
+                    ->orderBy(['id' => SORT_ASC])
+                    ->one()
+                ;
+                if ($newMainImg){
+                    $newMainImg->isMain = 1;
+                    $newMainImg->save();
+                }
+            }
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $items = [];
+            return $items;
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $items = ['error' => ['Ошибка удаления. Обратитесь к администратору.']];
+            return $items;
         }
     }
 

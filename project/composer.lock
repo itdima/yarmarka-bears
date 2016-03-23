@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bb2dca0a454ef6729bb219f7b51484a6",
-    "content-hash": "8f67e88b7bd554cc66f99e72ba60a456",
+    "hash": "4eea061ebc518146db87af19096a0c4b",
+    "content-hash": "d3771133c7554f7bcdf1b35a6238881b",
     "packages": [
         {
             "name": "abeautifulsite/simpleimage",
@@ -871,6 +871,47 @@
                 "yii2"
             ],
             "time": "2016-01-10 16:51:42"
+        },
+        {
+            "name": "kotchuprik/yii2-fotorama-widget",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kotchuprik/yii2-fotorama-widget.git",
+                "reference": "4a98b07f15ad76a8cd9f483fc408949fd61684c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kotchuprik/yii2-fotorama-widget/zipball/4a98b07f15ad76a8cd9f483fc408949fd61684c6",
+                "reference": "4a98b07f15ad76a8cd9f483fc408949fd61684c6",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kotchuprik\\fotorama\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Constantin Chuprik",
+                    "email": "constantinchuprik@gmail.com"
+                }
+            ],
+            "description": "Fotorama widget for Yii2",
+            "homepage": "http://github.com/kotchuprik/yii2-fotorama-widget",
+            "keywords": [
+                "fotorama",
+                "yii2"
+            ],
+            "time": "2014-08-15 19:08:27"
         },
         {
             "name": "lajax/yii2-language-picker",

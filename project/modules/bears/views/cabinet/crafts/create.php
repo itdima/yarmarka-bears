@@ -1,16 +1,9 @@
 <?php
-
-use yii\helpers\Html;
-
-
-/* @var $this yii\web\View */
-/* @var $model app\modules\bears\models\Products */
-
+$this->title = \Yii::t('app', 'Добавить работу');
+$this->params['breadcrumbs'][] = ['label' => \Yii::t('app', 'Работы'), 'url' => ['cabinet/crafts/index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
-
-
-<?= $this->render('_form', [
-    'model' => $model,
-]) ?>
-
+        <?= $this->render('forms/_form', [
+            'model' => $model,
+        ]) ?>

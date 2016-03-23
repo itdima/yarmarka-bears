@@ -23,6 +23,14 @@ return [
     'Код подтверждения'=>'Verification code',
     'Выберите страну...'=>'Select country...',
     'Добавить работу'=>'Add craft',
-    //Ошибки
-    'Введенные пароли должны совпадать'=>'Repeat password must be repeated exactly.'
+    'Редактировать'=>'Update',
+    'Ошибка'=>'Error',
+    //Ошибки и сообщения
+    'Введенные пароли должны совпадать'=>'Repeat password must be repeated exactly.',
+    'Сохранено успешно'=>'Save complete',
+    'Извините, во время сохранения произошла ошибка'=>'Sorry, error occured while saving',
+    //Названия страниц
+    'Кабинет'=>'Cabinet',
+    'Работы'=>'Crafts',
+    'Обо мне'=> 'About me',
 ];

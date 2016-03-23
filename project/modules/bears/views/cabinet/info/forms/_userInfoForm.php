@@ -3,17 +3,14 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\web\JsExpression;
 use kartik\file\FileInput;
-use kartik\icons\Icon;
 use kartik\select2\Select2;
+use kartik\icons\Icon;
 
 ?>
-
-
 <?php $form = ActiveForm::begin([
     'id' => 'profile-form',
     'options' => [
         'enctype' => 'multipart/form-data',
-        'data-pjax' => true,
     ],
 ]); ?>
 
@@ -97,9 +94,10 @@ use kartik\select2\Select2;
 
         <?= $form->field($model, 'about')->textarea(['placeholder' => 'About', 'style' => 'height:170px;'])->label(false) ?>
         <div class="row divider-bottom">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <?php
                 Icon::map($this, Icon::FI);
+                //echo Icon::show('ru', null, Icon::FI);
                 $format = "function format(state) {if (!state.id) return state.text; return '<span class=\'flag-icon flag-icon-'+state.id+' \'></span>  ' + state.text;}";
                 echo $form->field($model, 'country')->label(false)->widget(Select2::classname(), [
                     'name' => 'state_10',
@@ -118,11 +116,10 @@ use kartik\select2\Select2;
                 ?>
 
             </div>
-            <div class="col-sm-2">
-
-                <?= Html::button(
+            <div class="col-sm-3">
+                <?= Html::submitButton(
                     \Yii::t('app', 'Сохранить'),
-                    ['class' => 'btn', 'name' => 'add-button', 'id' => 'profile-form-submit']
+                    ['class' => 'btn', 'name' => 'add-button']
                 ) ?>
             </div>
         </div>
@@ -133,11 +130,12 @@ use kartik\select2\Select2;
 <?php ActiveForm::end(); ?>
 
 <?php
+/*
 $this->registerJs(new \yii\web\JsExpression('
     $("#profile-form-submit").on("click", function (e) {
         e.preventDefault();
         $("#profile-form").submit();
     });
 '));
-
+*/
 ?>
