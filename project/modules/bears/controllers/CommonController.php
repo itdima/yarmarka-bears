@@ -4,6 +4,7 @@ namespace app\modules\bears\controllers;
 use Yii;
 
 
+
 /**
  * Common bears controller
  */

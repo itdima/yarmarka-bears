@@ -306,7 +306,15 @@ h1, h2, h3 {
     margin: 0;
 }
 
-/*---Меню кабинета----*/
+
+/*---Кабинет----*/
+
+
+.avatar-block,.avatar-block img{
+    border-radius: 50px;
+    width:160px;
+    min-height: 160px;
+}
 
 .profile-nav-menu{
     box-shadow: 1px 1px 3px rgba(0,0,0,0.6);
@@ -336,6 +344,8 @@ h1, h2, h3 {
     font-size:1.1em;
     background-color: transparent;
 }
+
+
 
 /* ---------------  Блоки Thumbnails для каталога --------------*/
 
@@ -394,6 +404,7 @@ div.thumbnail.shadow:after
 }
 
 #content {
+    padding-bottom: 10px;
     font-size: 1.2em;
 }
 
@@ -409,11 +420,24 @@ div.thumbnail.shadow:after
 }
 
 
-
-
-
-
-
-
-
-
+/*-----Модальное окно FileApi----*/
+.popup__body {
+    margin: 10px 10px 5px;
+}
+.popup {
+    margin: 25px;
+    float: left;
+    display: inline-block;
+    box-shadow: 0 0 5px #000;
+    background-color: #fff;
+}
+.themodal-overlay {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 100000;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}

@@ -13,21 +13,14 @@ use yii\web\AssetBundle;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class BearsAsset extends AssetBundle
+class ModalAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/font-awesome.min.css',
-        'css/bears.css',
+        'css/the-modal.css',
     ];
     public $js = [
-        'js/bears.js',
-    ];
-    public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
-        'yii\bootstrap\BootstrapPluginAsset',
-       // 'app\modules\bears\assets\ModalAsset',
+        'js/jquery.the-modal.js',
     ];
 }

@@ -1,9 +1,6 @@
 <?php
 namespace app\modules\bears\controllers;
 
-
-
-
 use app\modules\bears\controllers\cabinet\CraftsController;
 use app\modules\bears\models\Crafts;
 

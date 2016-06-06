@@ -7,7 +7,9 @@ $this->title = \Yii::t('app', 'Обо мне');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?= $this->render('forms/_userInfoForm',['model'=>$model,'country'=>$country]); ?>
+<?= $this->render('forms/_userInfoForm', ['model' => $model, 'country' => $country]); ?>
+
+
 
 
 

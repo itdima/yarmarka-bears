@@ -55,7 +55,7 @@ class CraftsController extends \app\modules\bears\controllers\CommonController {
             if ($model->save()) {
                 $model->images = UploadedFile::getInstances($model, 'images');
                 foreach ($model->images as $image) {
-                    $model->uploadImage($image, 'uploads');
+                    $model->uploadImage($image);
                 }
                 $this->setFlash(\Yii::t('app','Сохранено успешно'));
             } else {
@@ -82,7 +82,7 @@ class CraftsController extends \app\modules\bears\controllers\CommonController {
             if ($model->save()) {
                 $model->images = UploadedFile::getInstances($model, 'images');
                 foreach ($model->images as $image) {
-                    $model->uploadImage($image, 'uploads');
+                    $model->uploadImage($image);
                 }
                 $this->setFlash(\Yii::t('app','Сохранено успешно'));
             } else {

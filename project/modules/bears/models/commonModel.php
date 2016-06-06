@@ -9,10 +9,16 @@ namespace app\modules\bears\models;
 
 use Yii;
 
+
 class commonModel extends \yii\db\ActiveRecord
 {
-    public $images;
+    public $uploadFilePath;
 
+    public function init()
+    {
+        $this->uploadFilePath = Yii::getAlias('@webroot') . '/upload/';
+        parent::init();
+    }
 
     /**
      * @return array
@@ -27,6 +33,7 @@ class commonModel extends \yii\db\ActiveRecord
                 'class' => \yii\behaviors\TimestampBehavior::className(),
                 'value' => new \yii\db\Expression('NOW()'),
             ],
+
         ];
     }
 
@@ -34,9 +41,9 @@ class commonModel extends \yii\db\ActiveRecord
      * Прикрепление изображения к модели
      * @return image
      */
-    public function uploadImage($image,$uploadPath)
+    public function uploadImage($image)
     {
-        $tempName = Yii::$app->basePath . '/'.$uploadPath.'/' . Yii::$app->security->generateRandomString() .'.'. $image->extension;
+        $tempName =  $this->uploadFilePath . Yii::$app->security->generateRandomString() . '.' . $image->extension;
         $image->saveAs($tempName);
         $uploadedImage = $this->attachImage($tempName);
         if ($uploadedImage && file_exists($tempName)) {

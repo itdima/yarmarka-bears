@@ -7,6 +7,7 @@ use app\models\User;
 use Yii;
 
 
+
 /**
  * This is the model class for table "bears_user_profile".
  *
@@ -19,7 +20,24 @@ use Yii;
  */
 class UserProfile extends commonModel
 {
+    public $image;
 
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(),[
+/*
+            'uploadBehavior' => [
+                'class' => \vova07\fileapi\behaviors\UploadBehavior::className(),
+                'attributes' => [
+                    'image' => [
+                        'path' => $this->uploadFilePath,
+                        'tempPath' => $this->uploadFilePath,
+                    ],
+                ]
+            ],
+*/
+        ]);
+    }
 
     /**
      * @inheritdoc
@@ -28,6 +46,7 @@ class UserProfile extends commonModel
     {
         return '{{%user_profile}}';
     }
+
 
     /**
      * @inheritdoc
@@ -38,8 +57,9 @@ class UserProfile extends commonModel
             [['id_user'], 'integer'],
             [['about'], 'string', 'max' => 500],
             [['country'], 'string', 'max' => 2],
-            [['images'], 'file', 'maxFiles' => 0],
-            [['created_at','updated_at'],'safe'],
+          //  [['image'], 'file','extensions' => 'jpeg, gif, png, jpg'],
+           // [['image'], 'file'],
+            [['created_at','updated_at','image'],'safe'],
         ];
     }
 
@@ -53,7 +73,7 @@ class UserProfile extends commonModel
             'id_user' => 'Id User',
             'about' => 'About',
             'country' => 'Country',
-            'images' => 'Photo',
+            'image' => 'Photo',
         ];
     }
 

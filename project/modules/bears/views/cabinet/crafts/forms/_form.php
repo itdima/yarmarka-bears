@@ -75,7 +75,9 @@ $form = ActiveForm::begin([
 echo $form->field($model, 'images[]')->widget(FileInput::classname(), [
     // 'language' => 'ru',
     'options' => [
-        'multiple' => true
+        'multiple' => true,
+        'accept' => 'image/*',
+
     ],
     'pluginOptions' => [
         'allowedExtensions' => ['jpg','jpeg','gif','png'],
