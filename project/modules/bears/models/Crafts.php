@@ -17,6 +17,8 @@ use Yii;
  */
 class Crafts extends commonModel
 {
+    public $tags_field; //теги текущей модели
+    public $list_tags; //список всех тегов
     /**
      * @inheritdoc
      */
@@ -35,6 +37,7 @@ class Crafts extends commonModel
         return [
             [['user'], 'integer'],
             [['price'], 'number'],
+            [['tags_field'], 'each', 'rule' => ['string']],
             [['title','price','currency'],'required'],
             [['currency'], 'string', 'max' => 3],
             [['title'], 'string', 'max' => 255],
@@ -52,11 +55,12 @@ class Crafts extends commonModel
         return [
             'id' => 'ID',
             'user' => 'User',
-            'title' => 'Title',
-            'description' => 'Description',
-            'price' => 'Price',
-            'images' => 'Photo',
-            'currency' => 'Currency'
+            'title' => Yii::t('app','Заголовок'),
+            'description' => Yii::t('app','Описание'),
+            'price' => Yii::t('app','Цена'),
+            'images' => Yii::t('app','Фото'),
+            'currency' => Yii::t('app','Валюта'),
+            'tags_field' => Yii::t('app','Тэги'),
         ];
     }
 
@@ -68,5 +72,25 @@ class Crafts extends commonModel
         return $this->hasOne(BearsUserProfile::className(), ['id_user' => 'user']);
     }
 
+
+
+    public function getTagsCrafts()
+    {
+        return $this->hasMany(TagsCrafts::className(), ['id_craft' => 'id']);
+    }
+
+    public function getTags()
+    {
+        return $this->hasMany(Tags::className(), ['id' => 'id_tag'])
+            ->via('tagsCrafts');
+    }
+
+/*
+    public function getTags()
+    {
+        return $this->hasMany(Tags::className(), ['id' => 'id_tag'])
+            ->viaTable('bears_tags_crafts', ['id_craft' => 'id']);
+    }
+*/
 
 }

@@ -3,6 +3,7 @@
 namespace app\modules\bears\controllers\cabinet;
 
 use app\modules\bears\models\Crafts;
+use app\modules\bears\models\Tags;
 use Yii;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
@@ -33,6 +34,8 @@ class CraftsController extends \app\modules\bears\controllers\CommonController {
             ->all();
     }
 
+
+
     /**
      * Lists all Products models.
      * @return mixed
@@ -43,6 +46,8 @@ class CraftsController extends \app\modules\bears\controllers\CommonController {
     }
 
 
+
+
     /**
      * Creates a new Craft model.
      * @return mixed
@@ -50,7 +55,7 @@ class CraftsController extends \app\modules\bears\controllers\CommonController {
     public function actionAdd()
     {
         $model = new Crafts();
-        if (\Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
+        if (\Yii::$app->request->isPost && $model->load(\Yii::$app->request->post())) {
             $model->user = Yii::$app->user->id;
             if ($model->save()) {
                 $model->images = UploadedFile::getInstances($model, 'images');
@@ -62,6 +67,9 @@ class CraftsController extends \app\modules\bears\controllers\CommonController {
                 $this->setFlash(\Yii::t('app','Извините, во время сохранения произошла ошибка'), 'warning', 'glyphicon glyphicon-remove-sign');
             }
         }
+
+        $model->tags_field = Tags::getTags($model->tags);
+        $model->list_tags = Tags::getTags();
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -78,17 +86,24 @@ class CraftsController extends \app\modules\bears\controllers\CommonController {
         $model = $this->findModel($item);
         //POST
         if (\Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
-            //$model->user = Yii::$app->user->id;
+            //var_dump($model->tags_field);
             if ($model->save()) {
+                //Добавляем новые теги и сваязи с тегами
+                Tags::setNewTagsFromArray($model->tags_field, $model->id);
+                //Обрабатываем картинки
                 $model->images = UploadedFile::getInstances($model, 'images');
                 foreach ($model->images as $image) {
                     $model->uploadImage($image);
                 }
+                //Выводим сообщения
                 $this->setFlash(\Yii::t('app','Сохранено успешно'));
             } else {
                 $this->setFlash(\Yii::t('app','Извините, во время сохранения произошла ошибка'), 'warning', 'glyphicon glyphicon-remove-sign');
             }
+            //$model->tags = explode(';',$model->tags);
         }
+        $model->tags_field =  Tags::getTags($model->tags);
+        $model->list_tags = Tags::getTags();
         return $this->render('update', [
             'model' => $model,
         ]);

@@ -6,6 +6,8 @@ use kartik\form\ActiveForm;
 use \yii\widgets\MaskedInput;
 use kartik\file\FileInput;
 use yii\helpers\Url;
+use kartik\select2\Select2;
+use yii\web\JsExpression;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\bears\models\Products */
@@ -14,6 +16,21 @@ use yii\helpers\Url;
 ?>
 
 <?php
+
+$data = [
+    /*
+    "red" => "red",
+    "green" => "green",
+    "blue" => "blue",
+    "orange" => "orange",
+    "white" => "white",
+    "black" => "black",
+    "purple" => "purple",
+    "cyan" => "cyan",
+    "teal" => "teal"
+    */
+];
+
 $form = ActiveForm::begin([
     'id' => 'crafts-form',
     'options' => [
@@ -38,11 +55,34 @@ $form = ActiveForm::begin([
 ?>
 
 <?= $form->field($model, 'description')
-    ->textarea()
+    ->textarea(['style' => 'height:150px;'])
     ->label(null, [
         //          'class' => 'control-label col-sm-2',
     ]);
 ?>
+
+
+<?=$form->field($model, 'tags_field')->label(null)->widget(Select2::classname(), [
+    'name' => 'state_10',
+    'data' => $model->list_tags,
+    'language' => 'ru',
+    'options' => [
+        'placeholder' => Yii::t('app', 'Выберите...'),
+        'multiple' => true,
+    ],
+
+    'pluginOptions' => [
+        'tags' => true,
+        'maximumInputLength' => 10,
+        // 'width' => '200px',
+        //'templateResult' => new JsExpression("$format"),
+        // 'templateSelection' => new JsExpression("$format"),
+        // 'escapeMarkup' => new JsExpression("function(m) { return m; }"),
+    ],
+]);
+?>
+
+
     <div class="form-group">
         <?= Html::activeLabel($model, 'price', ['class' => 'col-sm-2 control-label']) ?>
         <div class="col-sm-3">
@@ -133,7 +173,7 @@ echo $form->field($model, 'images[]')->widget(FileInput::classname(), [
         <div class="col-sm-offset-2 col-sm-10">
             <?= Html::submitButton(
                 \Yii::t('app', 'Сохранить'),
-                ['class' => 'btn', 'name' => 'add-button']
+                ['class' => 'btn btn-block', 'name' => 'save-button']
             ) ?>
 
         </div>

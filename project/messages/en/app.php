@@ -25,6 +25,12 @@ return [
     'Добавить работу'=>'Add craft',
     'Редактировать'=>'Update',
     'Ошибка'=>'Error',
+    //Поля моделей
+    'Заголовок'=>'Title',
+    'Описание'=>'Description',
+    'Цена'=>'Price',
+    'Фото'=>'Photo',
+    'Тэги'=>'Tags',
     //Ошибки и сообщения
     'Введенные пароли должны совпадать'=>'Repeat password must be repeated exactly.',
     'Сохранено успешно'=>'Save complete',

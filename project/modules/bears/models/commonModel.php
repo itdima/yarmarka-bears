@@ -13,6 +13,7 @@ use Yii;
 class commonModel extends \yii\db\ActiveRecord
 {
     public $uploadFilePath;
+    public $images;
 
     public function init()
     {
