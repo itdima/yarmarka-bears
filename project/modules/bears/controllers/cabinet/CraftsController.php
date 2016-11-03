@@ -4,6 +4,7 @@ namespace app\modules\bears\controllers\cabinet;
 
 use app\modules\bears\models\Crafts;
 use app\modules\bears\models\Tags;
+use app\modules\bears\models\TagsCrafts;
 use Yii;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
@@ -45,9 +46,6 @@ class CraftsController extends \app\modules\bears\controllers\CommonController {
         return $this->render('index', ['models' => $this->getAllCrafts()]);
     }
 
-
-
-
     /**
      * Creates a new Craft model.
      * @return mixed
@@ -68,8 +66,6 @@ class CraftsController extends \app\modules\bears\controllers\CommonController {
             }
         }
 
-        $model->tags_field = Tags::getTags($model->tags);
-        $model->list_tags = Tags::getTags();
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -85,11 +81,9 @@ class CraftsController extends \app\modules\bears\controllers\CommonController {
     {
         $model = $this->findModel($item);
         //POST
+
         if (\Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
-            //var_dump($model->tags_field);
             if ($model->save()) {
-                //Добавляем новые теги и сваязи с тегами
-                Tags::setNewTagsFromArray($model->tags_field, $model->id);
                 //Обрабатываем картинки
                 $model->images = UploadedFile::getInstances($model, 'images');
                 foreach ($model->images as $image) {
@@ -100,14 +94,32 @@ class CraftsController extends \app\modules\bears\controllers\CommonController {
             } else {
                 $this->setFlash(\Yii::t('app','Извините, во время сохранения произошла ошибка'), 'warning', 'glyphicon glyphicon-remove-sign');
             }
-            //$model->tags = explode(';',$model->tags);
+            return $this->redirect(Yii::$app->request->referrer);
         }
-        $model->tags_field =  Tags::getTags($model->tags);
-        $model->list_tags = Tags::getTags();
+
+
+        foreach ($model->tags as $tag){
+            $res[] = $tag->tagname;
+        }
+        $model->tags = $res;
+
         return $this->render('update', [
             'model' => $model,
         ]);
 
+    }
+    /**
+     * Delete image of Craft model.
+     * @return mixed
+     */
+    public function actionDeletetag(){
+        if (Yii::$app->request->isAjax) {
+            $id_tag = Yii::$app->request->post('id_tag');
+            $id_craft = Yii::$app->request->post('id_craft');
+            $tag = Tags::find()->where('tagname=:id',[':id'=>$id_tag])->one();
+            $res = TagsCrafts::find()->where('(id_tag = :id_tag) and (id_craft = :id_craft)', [':id_tag' => $tag->id, ':id_craft' => $id_craft])->one();
+            $res->delete();
+        }
     }
 
     /**

@@ -17,19 +17,6 @@ use yii\web\JsExpression;
 
 <?php
 
-$data = [
-    /*
-    "red" => "red",
-    "green" => "green",
-    "blue" => "blue",
-    "orange" => "orange",
-    "white" => "white",
-    "black" => "black",
-    "purple" => "purple",
-    "cyan" => "cyan",
-    "teal" => "teal"
-    */
-];
 
 $form = ActiveForm::begin([
     'id' => 'crafts-form',
@@ -62,27 +49,57 @@ $form = ActiveForm::begin([
 ?>
 
 
-<?=$form->field($model, 'tags_field')->label(null)->widget(Select2::classname(), [
-    'name' => 'state_10',
-    'data' => $model->list_tags,
+
+<?=$form->field($model, 'tags')->label(null)->widget(Select2::classname(), [
+    //'name' => 'state_10',
+    'data' => app\modules\bears\models\Tags::getTagNamesAsArray(),
     'language' => 'ru',
+    'showToggleAll' => false,
     'options' => [
         'placeholder' => Yii::t('app', 'Выберите...'),
         'multiple' => true,
     ],
 
     'pluginOptions' => [
+        'allowClear' => true,
         'tags' => true,
         'maximumInputLength' => 10,
         // 'width' => '200px',
-        //'templateResult' => new JsExpression("$format"),
-        // 'templateSelection' => new JsExpression("$format"),
-        // 'escapeMarkup' => new JsExpression("function(m) { return m; }"),
+        'templateResult' => new JsExpression("function format(state) {return state.text;}"),
+        'templateSelection' => new JsExpression("function format(state) {return state.text;}"),
+        'escapeMarkup' => new JsExpression("function(m) { return m; }"),
+    ],
+    'pluginEvents' => [
+     /*   "change" => "function() { log('change'); }",
+        "select2:opening" => "function() { log('select2:opening'); }",
+        "select2:open" => "function() { log('open'); }",
+        "select2:closing" => "function() { log('close'); }",
+        "select2:close" => "function() { log('close'); }",
+        "select2:selecting" => "function() { log('selecting'); }",
+        "select2:select" => "function() { log('select'); }",
+        "select2:unselecting" => "function() { log('unselecting'); }",*/
+
+        "select2:unselect" => $model->isNewRecord?"function(e) {}":"function(e) {log('select2:unselect',e,$model->id)}",
     ],
 ]);
 ?>
 
-
+<?php
+$this->registerJs(new JsExpression('
+function log(name,evt,id_craft){
+   var data = evt.params.data;
+   $.ajax({
+   url: "' .  Url::toRoute(['cabinet/crafts/deletetag']) . '",
+   type: "POST",
+   data: {"id_tag":data.id,"id_craft":id_craft},
+   beforeSend: function () {
+    },
+   success: function (result) {
+   },
+  });
+}
+'));
+?>
     <div class="form-group">
         <?= Html::activeLabel($model, 'price', ['class' => 'col-sm-2 control-label']) ?>
         <div class="col-sm-3">

@@ -29,12 +29,22 @@ class Tags extends \yii\db\ActiveRecord
         return [
             [['tagname'], 'string', 'max' => 255],
             [['tagname'], 'filter', 'filter' => function($value){
-                $res = str_replace(' ', '', $value);
-                $res = '#'.str_replace('#', '', $res);
-                return $res;
-            }]
+                return self::getEditedTag($value);
+            }],
         ];
     }
+
+    public function getTagsCrafts()
+    {
+        return $this->hasMany(TagsCrafts::className(), ['id_tag' => 'id']);
+    }
+
+    public function getCrafts()
+    {
+        return $this->hasMany(Crafts::className(), ['id' => 'id_craft'])
+            ->via('tagsCrafts');
+    }
+
 
     /**
      * @inheritdoc
@@ -47,35 +57,22 @@ class Tags extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function getTags($tags = null){
-        $tags_arr = array();
-        if ($tags===null){
+    /**
+     * Функция изменения тэга (убираем пробелы, добавляем #)
+     */
+    public static function getEditedTag($tag){
+        $res = str_replace(' ', '', $tag);
+        $res = '#'.str_replace('#', '', $res);
+        return $res;
+    }
+
+    public static function getTagNamesAsArray(){
             $tags = self::find()->select('tagname')->all();
             foreach ($tags as $t) {
-                $tags_arr[$t['tagname']] = $t['tagname'];
+               $tags_arr[$t['tagname']] = $t['tagname'];
             }
-        } else {
-            foreach ($tags as $f) {
-                $tags_arr[] = $f['tagname'];
-            }
-        }
         return $tags_arr;
     }
 
-    public static function setNewTagsFromArray(array $tags, $idcraft){
-        foreach ($tags as $t){
-            if (!self::find()->where('tagname=:tagname',[':tagname'=>$t])->exists()){ //если тега нет
-                //добавить тег
-                $tag = new Tags();
-                $tag->tagname = $t;
-                if ($tag->save()) {
-                    //добавить связь
-                    $tc = new TagsCrafts();
-                    $tc->id_craft = $idcraft;
-                    $tc->id_tag = $tag->id;
-                    $tc->save();
-                }
-            }
-        }
-    }
+
 }
