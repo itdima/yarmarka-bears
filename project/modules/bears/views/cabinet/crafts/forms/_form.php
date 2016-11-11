@@ -25,7 +25,7 @@ $form = ActiveForm::begin([
     ],
     'enableClientValidation' => false,
     'enableAjaxValidation' => false,
-    //'action' => \yii\helpers\Url::toRoute(['cuser/cabinet']),
+    //'action' => \yii\helpers\Url::toRoute(['cabinet/crafts/update']),
     'type' => ActiveForm::TYPE_HORIZONTAL,
     'fieldConfig' => [
         //      'template' => "{label}\n<div class=\"col-sm-10\">{input}</div>\n<div class=\"col-sm-offset-2 col-sm-10\">{error}</div>",

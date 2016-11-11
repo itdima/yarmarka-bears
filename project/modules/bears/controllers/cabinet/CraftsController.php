@@ -35,8 +35,6 @@ class CraftsController extends \app\modules\bears\controllers\CommonController {
             ->all();
     }
 
-
-
     /**
      * Lists all Products models.
      * @return mixed
@@ -61,9 +59,11 @@ class CraftsController extends \app\modules\bears\controllers\CommonController {
                     $model->uploadImage($image);
                 }
                 $this->setFlash(\Yii::t('app','Сохранено успешно'));
+                return $this->redirect(['index']);
             } else {
                 $this->setFlash(\Yii::t('app','Извините, во время сохранения произошла ошибка'), 'warning', 'glyphicon glyphicon-remove-sign');
             }
+
         }
 
         return $this->render('create', [
@@ -79,9 +79,9 @@ class CraftsController extends \app\modules\bears\controllers\CommonController {
      */
     public function actionUpdate($item)
     {
+        //$item = Yii::$app->request->post('item');
         $model = $this->findModel($item);
         //POST
-
         if (\Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
             if ($model->save()) {
                 //Обрабатываем картинки
@@ -91,17 +91,14 @@ class CraftsController extends \app\modules\bears\controllers\CommonController {
                 }
                 //Выводим сообщения
                 $this->setFlash(\Yii::t('app','Сохранено успешно'));
+                return $this->redirect(['index']);
             } else {
                 $this->setFlash(\Yii::t('app','Извините, во время сохранения произошла ошибка'), 'warning', 'glyphicon glyphicon-remove-sign');
             }
-            return $this->redirect(Yii::$app->request->referrer);
-        }
 
+            //return $this->redirect(Yii::$app->request->referrer);
 
-        foreach ($model->tags as $tag){
-            $res[] = $tag->tagname;
         }
-        $model->tags = $res;
 
         return $this->render('update', [
             'model' => $model,
@@ -109,16 +106,27 @@ class CraftsController extends \app\modules\bears\controllers\CommonController {
 
     }
     /**
-     * Delete image of Craft model.
+     * Delete tag of Craft model.
      * @return mixed
      */
     public function actionDeletetag(){
+
         if (Yii::$app->request->isAjax) {
-            $id_tag = Yii::$app->request->post('id_tag');
+            $tagname = Yii::$app->request->post('id_tag');
             $id_craft = Yii::$app->request->post('id_craft');
-            $tag = Tags::find()->where('tagname=:id',[':id'=>$id_tag])->one();
-            $res = TagsCrafts::find()->where('(id_tag = :id_tag) and (id_craft = :id_craft)', [':id_tag' => $tag->id, ':id_craft' => $id_craft])->one();
-            $res->delete();
+            $tag = Tags::find()->where('tagname = :tagname',[':tagname'=>$tagname])->one();
+            $this->unbinTags($id_craft,$tag->id);
+        }
+    }
+
+    private function unbinTags($id_craft,$id_tag=null){
+        $tc_models = TagsCrafts::find()->where('id_craft = :id_craft',[':id_craft' => $id_craft]);
+        if (!empty($id_tag)){
+            $tc_models->andWhere('id_tag = :id_tag',[':id_tag' => $id_tag]);
+        }
+        $models = $tc_models->all();
+        foreach($models as $tc){
+            $tc->delete();
         }
     }
 
@@ -160,12 +168,19 @@ class CraftsController extends \app\modules\bears\controllers\CommonController {
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete()
     {
-        $this->findModel($id)->delete();
-
+        $id = Yii::$app->request->post('id');
+        $model = $this->findModel($id);
+        $model->removeImages();
+        $this->unbinTags($model->id);
+        $model->delete();
         return $this->redirect(['index']);
     }
+
+
+
+
 
     /**
      * Finds the Products model based on its primary key value.

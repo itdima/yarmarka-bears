@@ -35,6 +35,8 @@ return [
     'Введенные пароли должны совпадать'=>'Repeat password must be repeated exactly.',
     'Сохранено успешно'=>'Save complete',
     'Извините, во время сохранения произошла ошибка'=>'Sorry, error occured while saving',
+    'Подтвердить удаление?'=>'Сonfirm deletion?',
+    'Извините, но по запросу ничего не найдено.'=>'Sorry, search result is empty!',
     //Названия страниц
     'Кабинет'=>'Cabinet',
     'Работы'=>'Crafts',

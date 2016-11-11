@@ -17,6 +17,23 @@ use Yii;
  */
 class Crafts extends commonModel
 {
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if (!$insert){
+                $this->addTags($this->tags);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public function afterSave($insert, $changedAttributes){
+        parent::afterSave($insert, $changedAttributes);
+        if($insert){
+            $this->addTags($this->tags);
+        }
+    }
 
     /**
      * @inheritdoc
@@ -36,7 +53,6 @@ class Crafts extends commonModel
         return [
             [['user'], 'integer'],
             [['price'], 'number'],
-         //   [['tags_field'], 'each', 'rule' => ['string']],
             [['title','price','currency'],'required'],
             [['currency'], 'string', 'max' => 3],
             [['title'], 'string', 'max' => 255],
@@ -78,47 +94,55 @@ class Crafts extends commonModel
         return $this->hasMany(TagsCrafts::className(), ['id_craft' => 'id']);
     }
 
+
     public function getTags()
     {
-        return $this->hasMany(Tags::className(), ['id' => 'id_tag'])
-            ->via('tagsCrafts');
+        $t = $this->hasMany(Tags::className(), ['id' => 'id_tag'])
+            ->via('tagsCrafts')->all();
+        $res=null;
+        foreach ($t as $tag){
+            $res[] = $tag->tagname;
+        }
+       return $res;
+
     }
 
     public function setTags($tagnames){
-        foreach ($tagnames as $tagname){
-            $tag = Tags::find()
-                ->where('tagname = :tagname', [':tagname' => Tags::getEditedTag($tagname)])
-                ->one();
-            if (!empty($tag)) {
-
-                $tag_craft = TagsCrafts::find()
-                    ->where('id_tag=:id_tag and id_craft=:id_craft', [':id_tag' => $tag->id, ':id_craft' => $this->id])
-                    ->one();
-                if (!$tag_craft) {
-                    $tc = new TagsCrafts();
-                    $tc->id_craft = $this->id;
-                    $tc->id_tag = $tag->id;
-                    $tc->save();
-                }
-            } else {
-                $tag = new Tags();
-                $tag->tagname = $tagname;
-                if ($tag->save()) {
-                    $tc = new TagsCrafts();
-                    $tc->id_craft = $this->id;
-                    $tc->id_tag = $tag->id;
-                    $tc->save();
-                }
-            }
-        }
-        $res=null;;
-        foreach ($this->tags as $tag){
-           $res[] = $tag->tagname;
-        }
-        $this->tags = $res;
-
+        $this->tags = $tagnames;
     }
 
 
-
+    /**
+     * @return array of Tags
+     * Выполняет добавление и привязку тегов к модели craft
+     */
+    private function addTags($tagnames){
+        if (!empty($tagnames)) {
+            foreach ($tagnames as $tagname) {
+                $tag = Tags::find()
+                    ->where('tagname = :tagname', [':tagname' => Tags::getEditedTag($tagname)])
+                    ->one();
+                if (!empty($tag)) {
+                    $tag_craft = TagsCrafts::find()
+                        ->where('id_tag=:id_tag and id_craft=:id_craft', [':id_tag' => $tag->id, ':id_craft' => $this->id])
+                        ->one();
+                    if (!$tag_craft) {
+                        $tc = new TagsCrafts();
+                        $tc->id_craft = $this->id;
+                        $tc->id_tag = $tag->id;
+                        $tc->save();
+                    }
+                } else {
+                    $tag = new Tags();
+                    $tag->tagname = $tagname;
+                    if ($tag->save()) {
+                        $tc = new TagsCrafts();
+                        $tc->id_craft = $this->id;
+                        $tc->id_tag = $tag->id;
+                        $tc->save();
+                    }
+                }
+            }
+        }
+    }
 }

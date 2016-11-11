@@ -16,19 +16,17 @@ $this->params['breadcrumbs'][] = $this->title;
     ['class' => 'btn btn-block', 'name' => 'add-button']);
 ?>
 
-
 <div class="row">
     <?php
 
     if (!$models) {
-        echo '<div><p>Sorry, search result is empty!</p></div>';
+        echo '<div><p>'.\Yii::t('app', 'Извините, но по запросу ничего не найдено.').'</p></div>';
     } else {
         foreach ($models as $model) {
             $urlEdit = Url::toRoute(['cabinet/crafts/update', 'item' => $model->id]);
             echo '<div class="col-sm-6 col-md-4">
-                            <div class="thumbnail shadow">
-                                <a href="' . $urlEdit . '">';
-
+                            <div class="thumbnail shadow">';
+                              //  <a href="' . $urlEdit . '">';
             $widget = \kotchuprik\fotorama\Widget::begin([
                 'version' => '4.5.2',
                 'options' => [
@@ -44,17 +42,37 @@ $this->params['breadcrumbs'][] = $this->title;
                     'data-height' => "50%"
                 ],
             ]);
-            echo '<img src="' . $model->getImage()->getUrl('') . '"/>';
+                echo '<img src="' . $model->getImage()->getUrl('') . '"/>';
             $widget->end();
-            echo '</a>
-                            <div class="caption text-center">
-                                <a  href="' . $urlEdit . '">
-                                    <h4>' . $model->title . '</h4>
-                                </a>
-                            </div>
-                        </div>
-                    </div>';
+            //echo '</a><div class="caption text-right"><p>'
+             echo '<div class="caption text-right"><p>';
+            echo Html::a('<i class="fa fa-edit"></i>',
+                //['cabinet/crafts/update'],
+                $urlEdit,
+                [
+                    'class' => 'btn',
+                //    'name' => 'edit-button',
+                    'title' => \Yii::t('app', 'Редактировать'),
 
+                    'data'=>[
+                        'method' => 'post',
+                        'params'=>['item' => $model->id],
+                    ]
+
+                ]);
+            echo Html::a('<i class="fa fa-trash"></i>' ,
+                ['cabinet/crafts/delete'],
+                [
+                'class' => 'btn',
+             //   'name' => 'delete-button',
+                'title' => \Yii::t('app', 'Удалить'),
+                'data'=>[
+                    'method' => 'post',
+                    'confirm' => \Yii::t('app', 'Подтвердить удаление?'),
+                    'params'=>['id' => $model->id],
+                    ]
+                ]);
+            echo '</p></div></div></div>';
         }
     }
     ?>
