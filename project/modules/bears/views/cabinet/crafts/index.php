@@ -11,12 +11,18 @@ use yii\widgets\Breadcrumbs;
 $this->title = \Yii::t('app', 'Работы');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<?= Html::a('<i class="fa fa-plus"></i> &nbsp;' . \Yii::t('app', 'Добавить работу'),
-    ['cabinet/crafts/add'],
-    ['class' => 'btn btn-block', 'name' => 'add-button']);
-?>
+
+<div>
+    <?= $this->render('forms/_searchForm', [
+        'model' => $searchModel,
+    ]) ?>
+</div>
 
 <div class="row">
+    <?= Html::a('<i class="fa fa-plus"></i> &nbsp;' . \Yii::t('app', 'Добавить работу'),
+        ['cabinet/crafts/add'],
+        ['class' => 'btn btn-block', 'name' => 'add-button']);
+    ?>
     <?php
 
     if (!$models) {
@@ -77,6 +83,13 @@ $this->params['breadcrumbs'][] = $this->title;
     }
     ?>
 
+</div>
+<div class="row text-center">
+<?php
+    echo yii\widgets\LinkPager::widget([
+    'pagination' => $pages,
+    ]);
+?>
 </div>
 
 
