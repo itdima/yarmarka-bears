@@ -25,7 +25,15 @@ use \yii\helpers\Html;
 
         </li>
         <li class="divider-bottom"><a href="#" data-toggle="pill">Товары</a></li>
-        <li class="divider-bottom"><a href="#" data-toggle="pill">Блог</a></li>
+        <li class="divider-bottom">
+            <?= Html::a(
+                \Yii::t('app', 'Блог'),
+                ['cabinet/blog/index'],
+                [
+                    //     'id'=>'myCrafts',
+                ]
+            ) ?>
+        </li>
         <li><a href="#" data-toggle="pill">Счет</a></li>
     </ul>
 </div>

@@ -29,18 +29,19 @@ class CraftsController extends \app\modules\bears\controllers\CommonController {
         ];
     }
 
+
     /**
      * Lists all Products models.
      * @return mixed
      */
     public function actionIndex()
-
     {
         $searchModel = new \app\modules\bears\models\CraftsSearch();
         $query=null;
         if (\Yii::$app->request->isPost && $searchModel->load(\Yii::$app->request->post())) {
             if ($searchModel->validate()) {
                 $query = $searchModel->search(\Yii::$app->request->post());
+
             };
         };
         if (!isset($query)){
@@ -121,7 +122,6 @@ class CraftsController extends \app\modules\bears\controllers\CommonController {
      * @return mixed
      */
     public function actionDeletetag(){
-
         if (Yii::$app->request->isAjax) {
             $tagname = Yii::$app->request->post('id_tag');
             $id_craft = Yii::$app->request->post('id_craft');

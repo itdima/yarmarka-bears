@@ -39,6 +39,13 @@ class CraftsSearch extends commonModel
             if (!empty($this->priceMax)){
                 $query->andWhere('price <= :priceMax',[':priceMax'=>$this->priceMax]);
             }
+            //Тэги
+            $query->joinWith([
+                'tagsRel'=> function ($q) {
+                    $q->andFilterWhere(['like', 'tagname', $this->tag]);
+                }
+            ]);
+
         }
         return $query;
 

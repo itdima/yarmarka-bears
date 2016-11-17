@@ -16,9 +16,7 @@ use kartik\select2\Select2;
 use yii\web\JsExpression;
 ?>
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <?= \Yii::t('app', 'Поиск') ?>
-    </div>
+
 <div class="panel-body">
 
 <?php
@@ -54,27 +52,35 @@ $form = ActiveForm::begin([
     <div class="form-group">
         <div class="col-sm-2">
             <?= $form->field($model, 'priceMin',['showLabels'=>false])
-                ->textInput(['placeholder'=> Yii::t('app','Цена(min)')])
+                ->textInput(['placeholder'=> Yii::t('app','Цена').'(min)'])
                 ->label(null);
             ?>
         </div>
         <div class="col-sm-2">
             <?= $form->field($model, 'priceMax',['showLabels'=>false])
-                ->textInput(['placeholder'=> Yii::t('app','Цена(max)')])
+                ->textInput(['placeholder'=> Yii::t('app','Цена').'(max)'])
                 ->label(null);
             ?>
         </div>
-        <div class="col-sm-8">
-
+        <div class="col-sm-4">
+            <?= $form->field($model, 'tag',['showLabels'=>false])
+                ->textInput(['placeholder'=> Yii::t('app','Тэги')])
+                ->label(null);
+            ?>
+        </div>
+        <div class="col-sm-4 text-right">
+            <?= Html::submitButton('<i class="fa fa-search"></i> &nbsp;' .\Yii::t('app', 'Найти'),[
+                'class' => 'btn',
+                'name' => 'save-button'
+            ]); ?>
+            <?= Html::a('<i class="fa fa-trash-o"></i> &nbsp;' . \Yii::t('app', 'Очистить'),
+                null,
+                ['class' => 'btn', 'name' => 'reset-button',
+                    'onclick'=>"$('#crafts-search').find('input:text, input:password, input:file, select, textarea').val('');",
+                ]);
+            ?>
         </div>
     </div>
-<div class="form-group">
-    <div class="col-sm-offset-9 col-sm-3">
-
-        <?= Html::submitButton(\Yii::t('app', 'Найти'),['class' => 'btn', 'name' => 'save-button']); ?>
-        <?= Html::resetButton(\Yii::t('app', 'Очистить'),['class' => 'btn', 'name' => 'save-button']); ?>
-    </div>
-</div>
 
 <?php ActiveForm::end(); ?>
 

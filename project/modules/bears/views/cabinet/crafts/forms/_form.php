@@ -134,7 +134,6 @@ echo $form->field($model, 'images[]')->widget(FileInput::classname(), [
     'options' => [
         'multiple' => true,
         'accept' => 'image/*',
-
     ],
     'pluginOptions' => [
         'allowedExtensions' => ['jpg','jpeg','gif','png'],

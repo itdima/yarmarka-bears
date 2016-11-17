@@ -30,7 +30,8 @@
         "kartik-v/yii2-widget-activeform": "v1.4.7",
         "kotchuprik/yii2-fotorama-widget": "1.0",
         "rkit/fileapi-widget-yii2": "1.0.4",
-        "vova07/yii2-fileapi-widget": "0.1.8"
+        "vova07/yii2-fileapi-widget": "0.1.8",
+        "vova07/yii2-imperavi-widget": "1.2.10"
 
 
     },

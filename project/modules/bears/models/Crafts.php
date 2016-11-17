@@ -107,6 +107,11 @@ class Crafts extends commonModel
 
     }
 
+    public function getTagsRel(){
+        return $this->hasMany(Tags::className(), ['id' => 'id_tag'])
+            ->via('tagsCrafts');
+    }
+
     public function setTags($tagnames){
         $this->tags = $tagnames;
     }
