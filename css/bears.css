@@ -308,11 +308,24 @@ h1, h2, h3 {
 
 
 /*---Кабинет----*/
+
 .panel-body{
     padding-bottom: 0px;
 }
 
-.panel {
+.panel-default > .panel-heading {
+     color: inherit;
+    background-color: #f7f4eb;
+    border-color: #ddd;
+}
+
+.input-group-addon {
+    color: #f6ffff;
+    background-color: rgba(118,105,70,0.75);
+    border: 1px solid #ccc;
+}
+
+.search-form > .panel {
     margin-bottom: 20px;
     background-color: inherit;
     border: 2px solid #bab39f;

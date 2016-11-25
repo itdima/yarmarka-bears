@@ -22,6 +22,7 @@ class BearsAsset extends AssetBundle
         'css/bears.css',
     ];
     public $js = [
+        'js/app.js',
         'js/bears.js',
     ];
     public $depends = [

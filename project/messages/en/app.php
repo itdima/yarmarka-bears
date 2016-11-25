@@ -31,10 +31,14 @@ return [
     'Цена'=>'Price',
     'Фото'=>'Photo',
     'Тэги'=>'Tags',
+    'Дата до'=>'Date TO',
+    'Дата от'=>'Date FROM',
+    'Статья'=> 'Article',
     //Ошибки и сообщения
     'Введенные пароли должны совпадать'=>'Repeat password must be repeated exactly.',
     'Сохранено успешно'=>'Save complete',
     'Извините, во время сохранения произошла ошибка'=>'Sorry, error occured while saving',
+    'Извините, во время операции произошла ошибка'=>'Sorry, error occured while operation.',
     'Подтвердить удаление?'=>'Сonfirm deletion?',
     'Извините, но по запросу ничего не найдено.'=>'Sorry, search result is empty!',
     //Названия страниц

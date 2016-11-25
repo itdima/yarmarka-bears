@@ -32,11 +32,12 @@ class commonModel extends \yii\db\ActiveRecord
             ],
             'timestamp' => [
                 'class' => \yii\behaviors\TimestampBehavior::className(),
-                'value' => new \yii\db\Expression('NOW()'),
+                //'value' => new \yii\db\Expression('NOW()'),
             ],
 
         ];
     }
+
 
     /**
      * Прикрепление изображения к модели

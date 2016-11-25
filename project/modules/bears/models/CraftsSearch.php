@@ -30,7 +30,6 @@ class CraftsSearch extends commonModel
         $query = Crafts::find();
         $query->andWhere('user = :user', [':user' => \Yii::$app->user->id]);
         if (!empty($postParams)){
-            $query->andWhere('user = :user', [':user' => \Yii::$app->user->id]);
             $query->andFilterWhere(['like', 'title', $this->title]);
             $query->andFilterWhere(['like', 'description', $this->description]);
             if (!empty($this->priceMin)){

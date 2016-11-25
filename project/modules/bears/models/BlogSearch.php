@@ -2,65 +2,43 @@
 
 namespace app\modules\bears\models;
 
-use Yii;
-use yii\base\Model;
-use yii\data\ActiveDataProvider;
-use \app\modules\bears\models\Blog;
 
-/**
- * BLogSearch represents the model behind the search form about `app\models\blog`.
- */
-class BlogSearch extends Blog
+class BlogSearch extends commonModel
 {
+
+    public $title;
+    public $article;
+    public $date_from;
+    public $date_to;
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['title'], 'string', 'max' => 255],
+            [['date_from','date_to'], 'date', 'format' => 'dd.mm.yyyy'],
             [['article'], 'safe'],
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function scenarios()
-    {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
-    }
-
-    /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
-     * @return ActiveDataProvider
-     */
-    public function search($params)
-    {
+    public function search($postParams=null){
         $query = Blog::find();
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        $this->load($params);
-
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
+        $query->andWhere('user = :user', [':user' => \Yii::$app->user->id]);
+        if (!empty($postParams)){
+            $query->andFilterWhere(['like', 'title', $this->title]);
+            $query->andFilterWhere(['like', 'article', $this->article]);
+            if ($this->date_from) {
+                $query->andWhere('created_at >= :date_from', [':date_from' => \Yii::$app->formatter->asTimestamp($this->date_from)]);
+            }
+            if ($this->date_to) {
+                $query->andWhere('created_at <= :date_to', [':date_to' => (\Yii::$app->formatter->asTimestamp($this->date_to) + 86399)]);
+            }
+            //$query->andFilterWhere(['between', 'created_at', \Yii::$app->formatter->asTimestamp($this->date_from), \Yii::$app->formatter->asTimestamp($this->date_to)]);
         }
+        return $query;
 
-        $query->andFilterWhere([
-            'id' => $this->id,
-        ]);
-
-        $query->andFilterWhere(['like', 'article', $this->article]);
-
-        return $dataProvider;
     }
+
 }

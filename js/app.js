@@ -1,6 +1,4 @@
-/**
- * Created by Дима on 21.12.2015.
- */
+
 /**
  * Вывод всех свойств бъекта
  */
@@ -13,4 +11,12 @@ function strObj(obj,prefix,depth) {
         }
     }
     return str;
+}
+
+/**
+ * Очистка всех полей формы
+ */
+function clearForm(formname) {
+
+    $('#'+formname).find('input:text, input:password, input:file, select, textarea').val('');
 }

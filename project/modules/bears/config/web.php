@@ -8,6 +8,7 @@ $config = [
 
     ],
     'params' => [
+        'currentModule'=>'modules\bears',
         // list of parameters
     ],
 ];

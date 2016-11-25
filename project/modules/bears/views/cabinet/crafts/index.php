@@ -20,11 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="row">
     <?php
-
     if (!$models) {
         echo '<div><p>'.\Yii::t('app', 'Извините, но по запросу ничего не найдено.').'</p></div>';
-    } else {
-        foreach ($models as $model) {
+    } else { foreach ($models as $model) {
             $urlEdit = Url::toRoute(['cabinet/crafts/update', 'item' => $model->id]);
             echo '<div class="col-sm-6 col-md-4">
                             <div class="thumbnail shadow">';
@@ -87,6 +85,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="row text-center">
+
+
 <?php
     echo yii\widgets\LinkPager::widget([
     'pagination' => $pages,

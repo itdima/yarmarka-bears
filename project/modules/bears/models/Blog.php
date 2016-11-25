@@ -1,19 +1,23 @@
 <?php
-
 namespace app\modules\bears\models;
 
 use Yii;
-use yii\behaviors\TimestampBehavior;
-use yii\db\Expression;
 
-/**
- * This is the model class for table "blog".
- *
- * @property integer $id
- * @property string $article
- */
+
 class Blog extends commonModel
 {
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($insert){
+                $this->user = \Yii::$app->user->id;
+            }
+            return true;
+        }
+        return false;
+    }
+
+
 
     /**
      * @inheritdoc
@@ -23,15 +27,16 @@ class Blog extends commonModel
         return '{{%blogs}}';
     }
 
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['user'], 'integer'],
             [['title'],'required'],
-            [['article','title'], 'string'],
+            [['title'], 'string', 'max' => 255],
+            [['article'], 'string'],
             [['created_at','updated_at'],'safe'],
         ];
     }
@@ -43,8 +48,18 @@ class Blog extends commonModel
     {
         return [
             'id' => 'ID',
-            'article' => Yii::t('app','Ñòàòüÿ'),
-            'title' => Yii::t('app','Çàãîëîâîê'),
+            'user' => Yii::t('app','ĞŸĞ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ñ‚ĞµĞ»ÑŒ'),
+            'title' => Yii::t('app','Ğ—Ğ°Ğ³Ğ¾Ğ»Ğ¾Ğ²Ğ¾Ğº'),
+            'article' => Yii::t('app','Ğ¡Ñ‚Ğ°Ñ‚ÑŒÑ'),
         ];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser0()
+    {
+        return $this->hasOne(BearsUserProfile::className(), ['id_user' => 'user']);
+    }
+
 }
