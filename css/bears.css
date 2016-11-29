@@ -319,11 +319,7 @@ h1, h2, h3 {
     border-color: #ddd;
 }
 
-.input-group-addon {
-    color: #f6ffff;
-    background-color: rgba(118,105,70,0.75);
-    border: 1px solid #ccc;
-}
+
 
 .search-form > .panel {
     margin-bottom: 20px;

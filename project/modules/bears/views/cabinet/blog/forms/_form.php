@@ -53,7 +53,7 @@ $form = ActiveForm::begin([
                     $.ajax({
                         url: "' . Url::to(['cabinet/blog/imperavi-image-delete']) . '",
                         type: "post",
-                        data: {"url":url},
+                        data: {"url":url,"id":'.$model->id.'},
                     });}'),
         //'fileManagerJson' => Url::to(['/blog/files-get']),
         // 'fileUpload' => Url::to(['/blog/file-upload'])

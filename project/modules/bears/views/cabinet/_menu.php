@@ -24,7 +24,6 @@ use \yii\helpers\Html;
             ) ?>
 
         </li>
-        <li class="divider-bottom"><a href="#" data-toggle="pill">Товары</a></li>
         <li class="divider-bottom">
             <?= Html::a(
                 \Yii::t('app', 'Блог'),
@@ -34,6 +33,6 @@ use \yii\helpers\Html;
                 ]
             ) ?>
         </li>
-        <li><a href="#" data-toggle="pill">Счет</a></li>
+        <li><a href="#" data-toggle="pill">Сообщения</a></li>
     </ul>
 </div>

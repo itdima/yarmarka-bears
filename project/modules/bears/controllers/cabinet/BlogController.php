@@ -80,12 +80,11 @@ class BlogController extends \app\modules\bears\controllers\CommonController
     {
         if (Yii::$app->request->isAjax && Yii::$app->request->post('url')) {
             $path_parts = pathinfo(Yii::$app->request->post('url'));
-            $path = Yii::getAlias('@webroot') . '/images/imperavi/blog/' . $path_parts['basename'];
+            $path = Yii::getAlias('@webroot') . '/images/' . Yii::$app->params['currentWorld'] . '/User' . Yii::$app->user->id . '/imperavi/blog/'.Yii::$app->request->post('id').'/'.$path_parts['basename'];
             if (file_exists($path)) {
                 unlink($path);
             }
         }
-
     }
 
 
@@ -107,7 +106,7 @@ class BlogController extends \app\modules\bears\controllers\CommonController
             $query = $searchModel->search();
         }
         $countQuery = clone $query;
-        $pages = new \yii\data\Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 20]);
+        $pages = new \yii\data\Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 10]);
         $pages->pageSizeParam = false;
         $models = $query->offset($pages->offset)
             ->limit($pages->limit)

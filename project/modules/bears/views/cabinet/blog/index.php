@@ -35,7 +35,22 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
                 <div class="col-sm-8">
                     <h3 class="panel-title text-left">
-                        <?= $model->title ?>
+                        <?= Html::a($model->title,
+                            //['cabinet/crafts/update'],
+                            Url::toRoute(['cabinet/blog/update', 'item' => $model->id]),
+                            [
+                               // 'class' => 'btn btn-xs',
+                               // 'name' => 'edit-button',
+                               // 'title' => \Yii::t('app', 'Редактировать'),
+
+                                'data'=>[
+                                    'method' => 'post',
+                                    'params'=>['item' => $model->id],
+                                ]
+
+                            ]);
+                        ?>
+
                     </h3>
                 </div>
                 <div class="col-sm-2">
@@ -44,14 +59,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     </h5>
                 </div>
-                <div class="col-sm-2 text-center">
-                    <div class="btn-group btn-group-xs">
+                <div class="col-sm-2 text-right">
+
 
                     <?= Html::a('<i class="fa fa-edit"></i>',
                         //['cabinet/crafts/update'],
                         Url::toRoute(['cabinet/blog/update', 'item' => $model->id]),
                         [
-                            'class' => 'btn',
+                            'class' => 'btn btn-xs',
                             //    'name' => 'edit-button',
                             'title' => \Yii::t('app', 'Редактировать'),
 
@@ -66,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::a('<i class="fa fa-trash"></i>' ,
                         ['cabinet/blog/delete'],
                         [
-                            'class' => 'btn',
+                            'class' => 'btn btn-xs',
                             //   'name' => 'delete-button',
                             'title' => \Yii::t('app', 'Удалить'),
                             'data'=>[
@@ -76,7 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]
                         ]);
                     ?>
-                        </div>
+
                 </div>
             </div>
         </div>
