@@ -16,6 +16,8 @@ return [
     'Каталог'=>'Catalog',
     'Мастера'=>'Masters',
     'Блоги'=>'Blogs',
+    'Блог'=>'Blog',
+    'Сообщения'=>'Messages',
     'Мишки'=>'Bears',
     'Куклы'=>'Dolls',
     'Материалы'=>'Materials',
@@ -25,6 +27,8 @@ return [
     'Добавить работу'=>'Add craft',
     'Редактировать'=>'Update',
     'Ошибка'=>'Error',
+    'Очистить'=>'Clear',
+    'Найти'=>'Search',
     //Поля моделей
     'Заголовок'=>'Title',
     'Описание'=>'Description',
@@ -34,6 +38,10 @@ return [
     'Дата до'=>'Date TO',
     'Дата от'=>'Date FROM',
     'Статья'=> 'Article',
+    'Вид'=>'Type',
+    'Работа'=>'Craft',
+    'Материалы и аксессуары'=>'Materials and accessories',
+    'Выберите вид продукта...'=>'Select type...',
     //Ошибки и сообщения
     'Введенные пароли должны совпадать'=>'Repeat password must be repeated exactly.',
     'Сохранено успешно'=>'Save complete',

@@ -1,6 +1,6 @@
 <?php
-$this->title = \Yii::t('app', 'Добавить работу');
-$this->params['breadcrumbs'][] = ['label' => \Yii::t('app', 'Работы'), 'url' => ['cabinet/crafts/index']];
+$this->title = \Yii::t('app', 'Добавить');
+$this->params['breadcrumbs'][] = ['label' => \Yii::t('app', 'Каталог'), 'url' => ['cabinet/crafts/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

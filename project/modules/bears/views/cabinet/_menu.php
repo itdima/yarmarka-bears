@@ -16,7 +16,7 @@ use \yii\helpers\Html;
         </li>
         <li class="divider-bottom">
             <?= Html::a(
-                \Yii::t('app', 'Работы'),
+                \Yii::t('app', 'Каталог'),
                 ['cabinet/crafts/index'],
                 [
                //     'id'=>'myCrafts',
@@ -33,6 +33,14 @@ use \yii\helpers\Html;
                 ]
             ) ?>
         </li>
-        <li><a href="#" data-toggle="pill">Сообщения</a></li>
+        <li>
+            <?= Html::a(
+                \Yii::t('app', 'Сообщения'),
+                ['#'],
+                [
+                    //     'id'=>'myCrafts',
+                ]
+            ) ?>
+        </li>
     </ul>
 </div>

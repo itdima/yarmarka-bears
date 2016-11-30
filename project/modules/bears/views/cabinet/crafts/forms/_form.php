@@ -32,7 +32,16 @@ $form = ActiveForm::begin([
     ],
 ]); ?>
 
-
+<?= $form->field($model, 'type')->dropDownList(
+        [
+            '1' => Yii::t('app','Работы'),
+            '2' => Yii::t('app','Материалы и аксессуары'),
+        ],
+        [
+            'prompt' => Yii::t('app','Выберите вид продукта...'),
+        ]
+    );
+?>
 <?= $form->field($model, 'title')
     ->textInput()
     ->label(null, [

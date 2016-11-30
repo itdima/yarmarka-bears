@@ -11,6 +11,7 @@ class CraftsSearch extends commonModel
     public $title;
     public $description;
     public $tag;
+    public $type;
     /**
      * @inheritdoc
      */
@@ -18,7 +19,7 @@ class CraftsSearch extends commonModel
     {
         return [
         //    [['user'], 'integer'],
-            [['priceMin','priceMax'], 'number'],
+            [['priceMin','priceMax','type'], 'number'],
       //      [['currency'], 'string', 'max' => 3],
             [['title','tag'], 'string', 'max' => 255],
             [['description'], 'string', 'max' => 1024],
@@ -37,6 +38,9 @@ class CraftsSearch extends commonModel
             }
             if (!empty($this->priceMax)){
                 $query->andWhere('price <= :priceMax',[':priceMax'=>$this->priceMax]);
+            }
+            if (!empty($this->type)){
+                $query->andWhere('type = :type',[':type'=>$this->type]);
             }
             //Тэги
             $query->joinWith([

@@ -6,7 +6,7 @@ use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 
 
-$this->title = \Yii::t('app', 'Мой блог');
+$this->title = \Yii::t('app', 'Блог');
 $this->params['breadcrumbs'][] = $this->title;
 
 //echo Yii::$app->params['currentWorld'];

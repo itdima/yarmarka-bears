@@ -351,14 +351,16 @@ h1, h2, h3 {
 
 
 .profile-nav-menu a:hover {
-    font-size:1.1em;
+    color: #706443!important;
+    --font-size:1.1em;
     --font-weight: bold;
 }
 
 .profile-nav-menu > .nav-pills > li.active > a,
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
-    color: #2C2C2C;
+    --color: #2C2C2C;
+    color: #706443!important;
     --font-weight: bold;
     font-style: italic!important;
     font-size:1.1em;

@@ -51,9 +51,9 @@ class Crafts extends commonModel
     public function rules()
     {
         return [
-            [['user'], 'integer'],
+            [['user','type'], 'integer'],
             [['price'], 'number'],
-            [['title','price','currency'],'required'],
+            [['title','price','currency','type'],'required'],
             [['currency'], 'string', 'max' => 3],
             [['title'], 'string', 'max' => 255],
             [['description'], 'string', 'max' => 1024],
@@ -76,6 +76,7 @@ class Crafts extends commonModel
             'images' => Yii::t('app','Фото'),
             'currency' => Yii::t('app','Валюта'),
             'tags' => Yii::t('app','Тэги'),
+            'type' => Yii::t('app','Вид'),
         ];
     }
 
