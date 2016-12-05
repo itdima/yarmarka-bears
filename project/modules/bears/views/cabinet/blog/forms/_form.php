@@ -1,6 +1,6 @@
 <?php
 use kartik\form\ActiveForm;
-use vova07\imperavi\Widget;
+use vova07\imperavi\Widget as imperavi;
 use yii\web\JsExpression;
 use yii\helpers\Url;
 use yii\helpers\Html;
@@ -33,7 +33,7 @@ $form = ActiveForm::begin([
 
 ?>
 
-<?= $form->field($model, 'article')->widget(Widget::classname(), [
+<?= $form->field($model, 'article')->widget(imperavi::classname(), [
     'settings' => [
         'lang' => 'ru',
         'minHeight' => 300,

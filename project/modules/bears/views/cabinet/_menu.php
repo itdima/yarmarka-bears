@@ -35,8 +35,8 @@ use \yii\helpers\Html;
         </li>
         <li>
             <?= Html::a(
-                \Yii::t('app', 'Сообщения'),
-                ['#'],
+                \Yii::t('app', 'Сообщения').' <span class="badge">1</span>',
+                ['cabinet/message/index'],
                 [
                     //     'id'=>'myCrafts',
                 ]

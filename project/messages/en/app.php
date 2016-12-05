@@ -29,6 +29,8 @@ return [
     'Ошибка'=>'Error',
     'Очистить'=>'Clear',
     'Найти'=>'Search',
+    'Редактирование аватара'=>'Edit avatar',
+    'Изображение'=>'Image',
     //Поля моделей
     'Заголовок'=>'Title',
     'Описание'=>'Description',
@@ -42,6 +44,11 @@ return [
     'Работа'=>'Craft',
     'Материалы и аксессуары'=>'Materials and accessories',
     'Выберите вид продукта...'=>'Select type...',
+    'Отправитель'=>'Sender',
+    'Получатель'=>'Reciever',
+    'Сообщение'=>'Message',
+    'Сообщения'=>'Messages',
+    'Новое'=>'New',
     //Ошибки и сообщения
     'Введенные пароли должны совпадать'=>'Repeat password must be repeated exactly.',
     'Сохранено успешно'=>'Save complete',

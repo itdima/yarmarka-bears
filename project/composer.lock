@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4cd26cbadab9225c2e80a97594d8e08c",
-    "content-hash": "8bdc36a80f673bbf9e225f3247f988fb",
+    "hash": "3a56450e46c05175dc94d8ea813bd533",
+    "content-hash": "5564069bd90e60372baf661acfaca1f9",
     "packages": [
         {
             "name": "abeautifulsite/simpleimage",
@@ -530,6 +530,46 @@
                 "icon"
             ],
             "time": "2015-11-30 17:28:02"
+        },
+        {
+            "name": "hyii2/yii2-avatar",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/org-yii-china/yii2-avatar.git",
+                "reference": "8adb4ccd7aba4fa88f51eb3f71484d29f652f4da"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/org-yii-china/yii2-avatar/zipball/8adb4ccd7aba4fa88f51eb3f71484d29f652f4da",
+                "reference": "8adb4ccd7aba4fa88f51eb3f71484d29f652f4da",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "hyii2\\avatar\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-4-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Xianan Huang",
+                    "email": "xianan_huang@163.com"
+                }
+            ],
+            "description": "基于cropper的一款头像上传yii2组件",
+            "keywords": [
+                "extension",
+                "yii2"
+            ],
+            "time": "2016-08-01 09:28:29"
         },
         {
             "name": "kartik-v/bootstrap-fileinput",
@@ -2303,7 +2343,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "kartik-v/yii2-widget-fileinput": 20,
-        "kartik-v/yii2-widget-datepicker": 20
+        "kartik-v/yii2-widget-datepicker": 20,
+        "hyii2/yii2-avatar": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

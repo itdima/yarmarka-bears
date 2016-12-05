@@ -22,6 +22,7 @@ class UserProfile extends commonModel
 {
     public $image;
 
+
     public function behaviors()
     {
         return array_merge(parent::behaviors(),[

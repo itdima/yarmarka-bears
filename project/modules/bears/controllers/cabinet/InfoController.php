@@ -14,22 +14,51 @@ class InfoController extends \app\modules\bears\controllers\CommonController
     public $layout = '_cabinet.php';
 
 
-     /**
+    public function actions()
+    {
+        return [
+            'crop'=>[
+                'class' => 'hyii2\avatar\CropAction',
+                'config'=>[
+                    'bigImageWidth' => '200',
+                    'bigImageHeight' => '200',
+                    'middleImageWidth'=> '100',
+                    'middleImageHeight'=> '100',
+                    'smallImageWidth' => '50',
+                    'smallImageHeight' => '50',
+
+                    'uploadPath' => 'upload',
+                ],
+                'modelUser'=>UserProfile::getProfile(Yii::$app->user->id),
+            ]
+        ];
+
+    }
+
+    /**
      * Метод загрузки автара пользователя.
      *
      */
     public function actionAvatar()
     {
-        $profile = UserProfile::getProfile(Yii::$app->user->id);
-        $profile->image = UploadedFile::getInstanceByName('file');
-        if ($profile->image) {
-            $profile->removeImages();
-            $profile->uploadImage($profile->image);
+        if (Yii::$app->request->isPost) {
+            $profile = UserProfile::getProfile(Yii::$app->user->id);
+            $profile->image = UploadedFile::getInstanceByName($profile, 'image');
+            $post = Yii::$app->request->post();
+            $profile->imageData = $post['UserProfile']['imageData'];
+            $profile->config = $this->config;
+            if ($profile->image) {
+                $profile->removeImages();
+                $profile->uploadImage();
+            }
+            $result = [
+                'state'=>200,
+                'message'=>'succeed!',
+                'result'=>$profile->getImage()->getUrl(),
+            ];
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return $result;
         }
-       // $result = ['error' => Widget::t('fileapi', 'ERROR_CAN_NOT_UPLOAD_FILE')];
-        $result = ['avatar'=>$profile->getImage()->getUrl()];
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        return $result;
     }
 
     /**
@@ -44,6 +73,8 @@ class InfoController extends \app\modules\bears\controllers\CommonController
             throw new \yii\web\ForbiddenHttpException('You are not allowed to access this page');
         }
         */
+
+
         $profile = UserProfile::getProfile(Yii::$app->user->id);
         $name_lang = 'name_' . Yii::$app->language;
         $country = Country::find()->select([$name_lang, 'alpha'])->all();
