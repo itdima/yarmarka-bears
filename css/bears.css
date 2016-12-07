@@ -322,7 +322,10 @@ h1, h2, h3 {
 
 
 /*---Кабинет----*/
-
+.scrolluserdiv{
+    height:300px;
+    overflow-y: scroll;
+}
 
 .well{
     margin-bottom: 5px;

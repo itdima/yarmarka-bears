@@ -57,6 +57,7 @@ class UserProfile extends commonModel
         return [
             [['id_user'], 'integer'],
             [['about'], 'string', 'max' => 500],
+            [['sname','fname'], 'string', 'max' => 255],
             [['country'], 'string', 'max' => 2],
           //  [['image'], 'file','extensions' => 'jpeg, gif, png, jpg'],
            // [['image'], 'file'],
@@ -73,6 +74,8 @@ class UserProfile extends commonModel
             'id' => 'ID',
             'id_user' => 'Id User',
             'about' => 'About',
+            'fname' => 'First Name',
+            'sname' => 'Second Name',
             'country' => 'Country',
             'image' => 'Photo',
         ];

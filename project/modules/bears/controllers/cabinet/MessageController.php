@@ -3,8 +3,10 @@ namespace app\modules\bears\controllers\cabinet;
 
 use app\modules\bears\models\Message;
 use app\models\User;
+use app\modules\bears\models\UserProfile;
 use Yii;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 
 class MessageController extends \app\modules\bears\controllers\CommonController
 {
@@ -24,25 +26,30 @@ class MessageController extends \app\modules\bears\controllers\CommonController
 
     public function actionIndex()
     {
+        if (Yii::$app->request->isPjax) {
+            $userid = Yii::$app->request->post('user');
+            if (!empty($userid)) {
+                return $this->renderAjax('conversation', ['user' => $userid]);
+            }
+        }
         $user = Yii::$app->user->id;
-        $query = Yii::$app->db->createCommand("
+        $query  = Yii::$app->db->createCommand("
                                 select *
                                 from bears_messages
                                 WHERE sender = $user or receiver = $user
                                 group by sender + receiver");
         $models = $query->queryAll();
-
-        $users = [];
+        $models_user = UserProfile::find();
         foreach ($models as $model) {
             if ($model['sender'] != $user) {
-                $users[] = $model['sender'];
+                $models_user->orWhere(['id_user'=>$model['sender']]);
             };
             if ($model['receiver'] != $user) {
-                $users[] = $model['receiver'];
+                $models_user->orWhere(['id_user'=>$model['receiver']]);
             };
-        }
-        $users = User::find($users)->select(['username'])->all();
-        return $this->render('index', ['users' => $users]);
+        };
+        $user_profiles = $models_user->all();
+        return $this->render('index', ['users' => $user_profiles]);
     }
 
 
