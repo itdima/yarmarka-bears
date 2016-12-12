@@ -322,15 +322,24 @@ h1, h2, h3 {
 
 
 /*---Кабинет----*/
-.scrolluserdiv{
-    height:300px;
+.mypanel,.scrolluserdiv{
+    height: 350px;
     overflow-y: scroll;
+}
+
+.mymessage{
+    background-color: rgba(221, 212, 187, 0.53);
+}
+.userwell{
+    background-color: rgba(221, 212, 187, 0.53);
+}
+.notmymessage{
+    background-color: rgba(251, 248, 241, 0.64);
 }
 
 .well{
     margin-bottom: 5px;
     padding: 0;
-    background-color: rgba(221, 212, 187, 0.53);
     border: 1px solid rgb(218, 209, 184);
 }
 

@@ -15,7 +15,7 @@ use Yii;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class Message extends \yii\db\ActiveRecord
+class Message extends commonModel
 {
     /**
      * @inheritdoc
@@ -50,5 +50,40 @@ class Message extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app','Создано'),
             'updated_at' => Yii::t('app','Отредактировано'),
         ];
+    }
+
+    /**
+     * Функция подсчета новых сообщений
+     */
+    public static function getNewMessageCount($sender = null){
+        $models = Message::find();
+        $models->andWhere('receiver = :receiver',[':receiver'=>Yii::$app->user->id]);
+        $models->andWhere('isnew = 1');
+        if (!empty($sender)){
+            $models->andWhere('sender = :sender',[':sender'=>$sender]);
+        }
+        return $models->count();
+    }
+
+    public static function setNewToOldMessages($sender){
+        if (!empty($sender)) {
+            $query = \Yii::$app->db->createCommand()->update(
+                Yii::$app->db->tablePrefix . "messages",
+                ['isnew' => '0'],
+                '(receiver = :me) and (sender = :sender)',
+                [':me' => Yii::$app->user->id, ':sender' => $sender]
+            );
+            /*
+            $query = Yii::$app->db->createCommand("
+                                update ".Yii::$app->db->tablePrefix."messages
+                                set isnew=0
+                                where (receiver = :me) and (sender = :sender)
+                                ");
+
+            $query->bindValue(':me',Yii::$app->user->id);
+            $query->bindValue(':sender',$sender);
+            */
+            return $query->execute();
+        }
     }
 }

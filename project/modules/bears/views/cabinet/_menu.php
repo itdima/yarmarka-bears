@@ -35,7 +35,7 @@ use \yii\helpers\Html;
         </li>
         <li>
             <?= Html::a(
-                \Yii::t('app', 'Сообщения').' <span class="badge">1</span>',
+                \Yii::t('app', 'Сообщения')." <span class='badge'>".\app\modules\bears\models\Message::getNewMessageCount()."</span>",
                 ['cabinet/message/index'],
                 [
                     //     'id'=>'myCrafts',

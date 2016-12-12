@@ -56,6 +56,7 @@ return [
     'Извините, во время операции произошла ошибка'=>'Sorry, error occured while operation.',
     'Подтвердить удаление?'=>'Сonfirm deletion?',
     'Извините, но по запросу ничего не найдено.'=>'Sorry, search result is empty!',
+    'У вас нет открытых бесед с пользователями.'=>'You have no open conversations',
     //Названия страниц
     'Кабинет'=>'Cabinet',
     'Работы'=>'Crafts',
