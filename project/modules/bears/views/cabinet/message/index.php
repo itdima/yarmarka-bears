@@ -6,19 +6,14 @@ use \app\modules\bears\models\Message;
 
 $this->title = \Yii::t('app', 'Сообщения');
 $this->params['breadcrumbs'][] = $this->title;
+
 $this->registerJs(new JsExpression("
-var selecteduser=0;
+var activeConversationUser = 0;
 var showLoading=true;
-function getUser(){
-    return selecteduser;
-};
-function setUser(value){
-   selecteduser=value;
-};
 
 //проверка выбран ли собеседник
 function setDisabled(){
-    if(getUser()==0){
+    if(activeConversationUser==0){
         $('[setdisabled]').attr('disabled','disabled');
     } else {
         $('[setdisabled]').attr('disabled',null);
@@ -30,17 +25,27 @@ function refreshCountMessages(){
     $.ajax({
         url: '" . \yii\helpers\Url::toRoute(['cabinet/message/refresh-count']) . "',
         type: 'POST',
-        data: {user: getUser()},
+        data: {user: activeConversationUser},
         beforeSend: function () {},
         success: function (result) {
-               $('span[title='+getUser()+']').text(result);
-               hideEmptySpans();
+               $('span[title='+activeConversationUser+']').text(result.userMessageCount);
+               $('span[title=\'menu_message_count\']').text(result.totalMessageCount);
+               hideEmptyBadges();
         },
   });
 }
 
+//Обновляем окно чата с использованием activeConversationUser
+function refreshConversation(isShowLoading){
+    showLoading = isShowLoading;
+    if (activeConversationUser !== 0){
+        $('a[title='+activeConversationUser+']').trigger('click');
+    }
+    showLoading=true;
+}
+
 //Скрываем span с нулевыми значениями
-function hideEmptySpans(){
+function hideEmptyBadges(){
     $('span[class~=\'badge\']').each(function() {
         if (parseInt($(this).text())==0){
             $(this).addClass('hidden');
@@ -49,7 +54,11 @@ function hideEmptySpans(){
         }
     });
 }
+
+
+
 "));
+
 ?>
 
 <div class="contacts">
@@ -89,8 +98,8 @@ function hideEmptySpans(){
                 <div class="panel-body">
                     <?php Pjax::begin([
                         'id' => 'pjaxid', //контеинер
-                        'clientOptions' => ['method' => 'POST', 'data' => ['user' => new JsExpression("function(){return getUser()}")]],
-                        //  'enablePushState' => true, //обновлять url
+                        'clientOptions' => ['method' => 'POST', 'data' => ['user' => new JsExpression("function(){return activeConversationUser}")]],
+                        //'enablePushState' => true, //обновлять url
                         'timeout' => 10000, //время выполнения запроса
                         'linkSelector' => 'a[data-pjax]', //обрабатывать через pjax только отдельные ссылки
                     ]);
@@ -115,47 +124,54 @@ function hideEmptySpans(){
 
 
 <?php
-$this->registerJs(new JsExpression("
-    //при нажатии на ссылку заполняем переменную selecteduser
-$('a[data-pjax]').click(function(){setUser(this.title);})
 
-    //loading для pjax
+$this->registerJs(new JsExpression("
+    //---при нажатии на ссылку заполняем переменную
+$('a[data-pjax]').click(function(){
+    activeConversationUser = $(this).attr('title');
+});
+
+
+    //---loading для pjax
 $(document).on('pjax:send', function() {
     if (showLoading){
         $('#pjaxid').showLoading();
     }
 })
 $(document).on('pjax:complete', function() {
-   $('#pjaxid').hideLoading();
-   setDisabled();
-   showLoading=true;
-   refreshCountMessages();
+    if (showLoading){
+        $('#pjaxid').hideLoading();
+    } else {
+        showLoading=true;
+    };
+    refreshCountMessages();
+    setDisabled();
+
 })
 
-//Отправка сообщения
+    //---Отправка сообщения
 $('#send-message-button').on('click', function (e) {
     var message = $('#send-message-input').val();
     e.preventDefault();
   $.ajax({
    url: '" . \yii\helpers\Url::toRoute(['cabinet/message/send']) . "',
    type: 'POST',
-   data: {text: message, receiver: getUser()},
+   data: {text: message, receiver: activeConversationUser},
    beforeSend: function () {
         $('#send-message-input').showLoading();
     },
    success: function (result) {
         $('#send-message-input').hideLoading();
         $('#send-message-input').val('');
-        showLoading=false;
-        $('a[title='+result+']').trigger('click');
+        refreshConversation(false);
     },
   });
 });
 
-
+refreshConversation(false);
 setDisabled();
-hideEmptySpans();
-
+hideEmptyBadges();
 "));
 
 ?>
+

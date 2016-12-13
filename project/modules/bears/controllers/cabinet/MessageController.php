@@ -97,7 +97,10 @@ class MessageController extends \app\modules\bears\controllers\CommonController
     public function actionRefreshCount(){
         if (Yii::$app->request->isAjax) {
             if (!empty(Yii::$app->request->post('user'))){
-                return Message::getNewMessageCount(Yii::$app->request->post('user'));
+                \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                $userMessageCount = Message::getNewMessageCount(Yii::$app->request->post('user'));
+                $totalMessageCount = Message::getNewMessageCount();
+                return ['userMessageCount'=>$userMessageCount,'totalMessageCount'=>$totalMessageCount];
             }
         }
     }

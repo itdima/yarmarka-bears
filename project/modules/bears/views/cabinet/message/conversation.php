@@ -1,4 +1,6 @@
 
+
+
 <?php
 foreach ($models as $model) {
     ?>
@@ -25,5 +27,9 @@ foreach ($models as $model) {
 
     <?php
 }
+
+
+$this->registerJs("activeConversationUser=".$model->sender);
 ?>
+
 

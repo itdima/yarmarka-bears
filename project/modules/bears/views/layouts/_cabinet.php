@@ -2,7 +2,6 @@
 use  \yii\widgets\Breadcrumbs;
 use yii\helpers\Url;
 
-
 $this->beginContent('@app/modules/bears/views/layouts/main.php'); ?>
 
     <div class="row">
@@ -24,3 +23,4 @@ $this->beginContent('@app/modules/bears/views/layouts/main.php'); ?>
     </div>
 
 <?php $this->endContent(); ?>
+
