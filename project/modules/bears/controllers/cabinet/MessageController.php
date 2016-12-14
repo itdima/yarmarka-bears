@@ -50,27 +50,18 @@ class MessageController extends \app\modules\bears\controllers\CommonController
                                 ");
         $query->bindValue(':sender',$user);
         $query->bindValue(':receiver',$user);
-       // echo $query->getRawSql();
+
         $models = $query->queryAll();
         $models_user = UserProfile::find();
-        $fl=0;
         foreach ($models as $model) {
-        //    if ($model['sender'] != $user) {
-                $models_user->orWhere(['id_user' => $model['sender']]);
-                $fl=1;
-        //    };
-        //    if ($model['receiver'] != $user) {
-                $models_user->orWhere(['id_user' => $model['receiver']]);
-                $fl=1;
-        //    };
+            $models_user->orWhere(['id_user' => $model['receiver']]);
+            $models_user->orWhere(['id_user' => $model['sender']]);
         };
-        if ($fl == 1){
-            $user_profiles = $models_user->all();
-        } else {
-            $user_profiles = null;
-        }
 
-        return $this->render('index', ['users' => $user_profiles]);
+        $user_profiles = $models_user->all();
+
+
+        return $this->render('index', ['users' => $user_profiles,'me'=>$user]);
     }
 
     /**

@@ -45,6 +45,7 @@ return [
     'Материалы и аксессуары'=>'Materials and accessories',
     'Выберите вид продукта...'=>'Select type...',
     'Отправитель'=>'Sender',
+    'Отправить'=>'Send',
     'Получатель'=>'Reciever',
     'Сообщение'=>'Message',
     'Сообщения'=>'Messages',

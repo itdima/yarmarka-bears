@@ -22,3 +22,6 @@ function clearForm(formname) {
     $('#'+formname).find('input:text, input:password, input:file, select, textarea').val('');
 }
 
+
+
+

@@ -24,6 +24,7 @@ class BearsAsset extends AssetBundle
     public $js = [
         'js/app.js',
         'js/bears.js',
+        'js/jquery.sort-elements.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

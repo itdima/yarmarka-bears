@@ -14,9 +14,9 @@ var showLoading=true;
 //проверка выбран ли собеседник
 function setDisabled(){
     if(activeConversationUser==0){
-        $('[setdisabled]').attr('disabled','disabled');
+        $('fieldset[title=\'fieldset_send_message\']').attr('disabled','1');
     } else {
-        $('[setdisabled]').attr('disabled',null);
+        $('fieldset[title=\'fieldset_send_message\']').attr('disabled',null);
     }
 }
 
@@ -55,7 +55,14 @@ function hideEmptyBadges(){
     });
 }
 
-
+//Сортировка пользователей
+function sortUsersByMessages() {
+    $('a[count_messages]').sortElements(function (a, b) {
+        var count_sort = $(a).attr('count_messages') < $(b).attr('count_messages');
+        var alphabet_sort = $(a).text() > $(b).text();
+        return count_sort + alphabet_sort ? 1 : -1;
+    });
+}
 
 "));
 
@@ -68,25 +75,29 @@ function hideEmptyBadges(){
                 <?php
                 if (!empty($users)) {
                     foreach ($users as $user) {
-                        //$text = \yii\helpers\Html::img($user->getImage()->getUrl('50x50'), ['alt' => 'Photo', 'class' => 'img-circle']).'123';
+                        //===== Отменяем отображение себя!!!!
+                        //       if ($user->id_user <> $me) {
+                        $count = Message::getNewMessageCount($user->id_user);
                         echo \yii\bootstrap\Html::a(
                             "<div class='userwell well'>" .
                             \yii\helpers\Html::img($user->getImage()->getUrl('50x50'), ['alt' => 'Photo', 'class' => 'img-circle']) . "&nbsp" .
                             $user->fname .
                             $user->sname .
                             "&nbsp" . "<span title='$user->id_user' class='badge hidden'>" .
-                            Message::getNewMessageCount($user->id_user).
-                            "</span>".
+                            $count .
+                            "</span>" .
                             "</div>",
                             ['cabinet/message/index'],
                             [
+                                'count_messages' => $count,
                                 'data-pjax' => '1',
                                 'title' => $user->id_user,
                             ]);
 
+                        //        }
                     };
                 } else {
-                    echo \Yii::t('app','У вас нет бесед с пользователями.');
+                    echo \Yii::t('app', 'У вас нет бесед с пользователями.');
                 };
                 ?>
             </div>
@@ -107,15 +118,16 @@ function hideEmptyBadges(){
                 </div>
             </div>
 
-
-            <div class="input-group" >
-                <input id="send-message-input" setdisabled  type="text" class="form-control"
-                       placeholder="<?= \Yii::t('app', 'Сообщение') ?>">
+            <fieldset title="fieldset_send_message" disabled>
+                <div class="input-group">
+                    <input id="send-message-input"  type="text" class="form-control"
+                           placeholder="<?= \Yii::t('app', 'Сообщение') ?>">
                 <span class="input-group-btn">
-                    <button id="send-message-button" setdisabled class="btn btn-default"
+                    <button id="send-message-button"  class="btn"
                             type="button"><?= \Yii::t('app', 'Отправить') ?><span id="load"></span></button>
                 </span>
-            </div>
+                </div>
+            </fieldset>
 
 
         </div>
@@ -146,7 +158,6 @@ $(document).on('pjax:complete', function() {
     };
     refreshCountMessages();
     setDisabled();
-
 })
 
     //---Отправка сообщения
@@ -171,6 +182,7 @@ $('#send-message-button').on('click', function (e) {
 refreshConversation(false);
 setDisabled();
 hideEmptyBadges();
+sortUsersByMessages();
 "));
 
 ?>
