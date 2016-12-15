@@ -3,7 +3,7 @@
 
 $config = [
     'layout'=>'main',
-    'defaultRoute' => 'site/index',
+    'defaultRoute' => 'catalog/main/index',
     'components' => [
 
     ],

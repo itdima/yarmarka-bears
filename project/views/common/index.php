@@ -4,7 +4,7 @@ use \yii\helpers\Url;
 
 <div class="row">
     <div class="col-md-4">
-        <a href="<?=Url::to('bears/')?>">
+        <a href="<?=Url::to('bears/catalog/main/index')?>">
             <div class="data-block-dark thumbnail text-center">
                 <span>Teddy Bears and other friends</span>
                 <img src="<?= Yii::getAlias('@web') . '/images/bears/bears2.jpg' ?>" alt="bears_foto">

@@ -1,9 +1,10 @@
 <?php
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+
 use yii\web\JsExpression;
 use kartik\select2\Select2;
 use kartik\icons\Icon;
+use kartik\form\ActiveForm;
 use yii\helpers\Url;
 use vova07\imperavi\Widget as imperavi;
 
@@ -32,6 +33,8 @@ use vova07\imperavi\Widget as imperavi;
                 'options' => [
                     'enctype' => 'multipart/form-data',
                 ],
+                'enableClientValidation' => false,
+                'enableAjaxValidation' => false,
             ]); ?>
 
 
@@ -52,6 +55,42 @@ use vova07\imperavi\Widget as imperavi;
                 'options' =>['placeholder'=>Yii::t('app','Обо мне')],
             ])->label(false); ?>
 
+
+            <?=$form->field($model,'vk', [
+                'showLabels' => false,
+                'addon' => [
+                    'prepend' => [
+                        'content' => '<i class="fa fa-vk fa-lg" aria-hidden="true"></i>'
+                    ],
+                ]
+            ])
+                ->textInput(['placeholder' => Yii::t('app', 'Ссылка на страницу').' VK'])
+        //        ->label(null);
+            ?>
+
+            <?=$form->field($model,'facebook', [
+                'showLabels' => false,
+                'addon' => [
+                    'prepend' => [
+                        'content' => '<i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>'
+                    ],
+                ]
+            ])
+                ->textInput(['placeholder' => Yii::t('app', 'Ссылка на страницу').' Facebook'])
+            //        ->label(null);
+            ?>
+
+            <?=$form->field($model,'facebook', [
+                'showLabels' => false,
+                'addon' => [
+                    'prepend' => [
+                        'content' => '<i class="fa fa-instagram fa-lg" aria-hidden="true"></i>'
+                    ],
+                ]
+            ])
+                ->textInput(['placeholder' => Yii::t('app', 'Ссылка на страницу').' Instagram'])
+            //        ->label(null);
+            ?>
 
 
             <?php

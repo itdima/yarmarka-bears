@@ -66,6 +66,17 @@ class SiteController extends CommonController
         }
     }
 
+
+    /**
+     * Displays CATALOG page.
+     *
+     * @return mixed
+     */
+    public function actionCatalog()
+    {
+        return $this->render('catalog');
+    }
+
     /**
      * Displays about page.
      *

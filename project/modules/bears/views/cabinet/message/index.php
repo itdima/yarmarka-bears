@@ -111,8 +111,8 @@ function sortUsersByMessages() {
                         'id' => 'pjaxid', //контеинер
                         'clientOptions' => ['method' => 'POST', 'data' => ['user' => new JsExpression("function(){return activeConversationUser}")]],
                         //'enablePushState' => true, //обновлять url
-                        'timeout' => 10000, //время выполнения запроса
-                        'linkSelector' => 'a[data-pjax]', //обрабатывать через pjax только отдельные ссылки
+                        'timeout' => 10000,
+                        'linkSelector' => 'a[data-pjax]', 
                     ]);
                     Pjax::end(); ?>
                 </div>

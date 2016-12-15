@@ -7,8 +7,7 @@
 use yii\helpers\Html;
 use \yii\helpers\Url;
 use app\modules\bears\assets\BearsAsset;
-use raoul2000\widget\sidr\SidrAsset;
-use raoul2000\widget\sidr\Sidr;
+
 use timurmelnikov\widgets\ShowLoading;
 
 BearsAsset::register($this);
@@ -49,6 +48,15 @@ foreach (Yii::$app->session->getAllFlashes() as $message):;
     ]);
 endforeach;
 
+
+
+?>
+<?php
+/*
+
+ use raoul2000\widget\sidr\SidrAsset;
+ use raoul2000\widget\sidr\Sidr;
+
 //----Виджет всплывающего меню
 SidrAsset::$theme = SidrAsset::THEME_LIGHT;
 echo Sidr::widget([
@@ -71,7 +79,7 @@ echo Sidr::widget([
     ]
 ]);
 
-?>
+
 
 <div id="sidr" class="sidr left">
     <div>
@@ -91,6 +99,19 @@ echo Sidr::widget([
         </ul>
     </div>
 </div>
+
+ <!-- Toggle для бокового меню  -->
+            <div class="col-xs-2 col-sm-1 col-nav">
+                <a class="sidr-selector navbar-left" href>
+                    <i class="fa fa-indent fa-2x"></i>
+                </a>
+            </div>
+
+*/
+
+$controller = $this->context->id;
+$action = $this->context->action->id;
+?>
 <!-- ----------- -->
 
 
@@ -98,13 +119,10 @@ echo Sidr::widget([
 
     <div class="row wrap-nav navbar-fixed-top">
         <div class="divider-bottom">
-            <!-- Toggle для бокового меню  -->
             <div class="col-xs-2 col-sm-1 col-nav">
-                <a class="sidr-selector navbar-left" href>
-                    <i class="fa fa-indent fa-2x"></i>
-                </a>
+
             </div>
-            <!-- navbar -->
+            <!-- <div class="col-xs-10 col-sm-11 col-nav"> -->
             <div class="col-xs-10 col-sm-11 col-nav">
                 <!-- Navbar -->
                 <nav class="navbar navbar-default" role="navigation" id="navigation">
@@ -121,19 +139,28 @@ echo Sidr::widget([
                             </button>
                         </div>
 
+
+
                         <div id="navbar" class="collapse navbar-collapse">
                             <ul class="nav navbar-nav" id="fornavclick">
-                                <li <?php echo ($this->context->action->id == 'index') ? "class='active'" : "class"; ?>>
-                                    <a href="<?= Url::toRoute(['site/index'], true); ?>"><?= \Yii::t('app', 'Главная') ?></a>
+                                <li <?php echo ($action == 'index' and $controller=='site') ? "class='active'" : "class"; ?>>
+                                    <a href="<?= Url::toRoute(['/'], true); ?>"><?= '<i class="fa fa-arrow-left" aria-hidden="true"></i> '.\Yii::t('app', 'Портал') ?></a>
                                 </li>
 
-                                <li <?php echo ($this->context->action->id == 'about') ? "class='active'" : "class"; ?>>
+                                <li <?php echo ($action == 'index' and $controller=='catalog/main') ? "class='active'" : "class"; ?>>
+                                    <a href="<?= Url::toRoute(['catalog/main/index'], true); ?>"><?= \Yii::t('app', 'Каталог') ?></a>
+                                </li>
+
+                                <li <?php echo ($action == 'contact' and $controller=='site') ? "class='active'" : "class"; ?>>
+                                    <a href="<?= Url::toRoute(['site/contact'], true); ?>"><?= \Yii::t('app', 'Контакт') ?></a>
+                                </li>
+
+
+                                <li <?php echo ($action == 'about' and $controller=='site') ? "class='active'" : "class"; ?>>
                                     <a href="<?= Url::toRoute(['site/about'], true); ?>"><?= \Yii::t('app', 'О нас') ?></a>
                                 </li>
 
-                                <li <?php echo ($this->context->action->id == 'contact') ? "class='active'" : "class"; ?>>
-                                    <a href="<?= Url::toRoute(['site/contact'], true); ?>"><?= \Yii::t('app', 'Контакт') ?></a>
-                                </li>
+
                             </ul>
                             <ul class="nav navbar-nav navbar-right" id="fornavclick">
                                 <?php if (Yii::$app->user->isGuest) { ?>
@@ -194,7 +221,7 @@ echo Sidr::widget([
                         </div>
                     </div>
                 </nav>
-            </div>
+                <!-- </div> --></div>
 
         </div>
     </div>

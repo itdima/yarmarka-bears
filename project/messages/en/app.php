@@ -49,6 +49,7 @@ return [
     'Получатель'=>'Reciever',
     'Сообщение'=>'Message',
     'Сообщения'=>'Messages',
+    'Ссылка на страницу'=>'Link to',
     'Новое'=>'New',
     //Ошибки и сообщения
     'Введенные пароли должны совпадать'=>'Repeat password must be repeated exactly.',
@@ -62,4 +63,6 @@ return [
     'Кабинет'=>'Cabinet',
     'Работы'=>'Crafts',
     'Обо мне'=> 'About me',
+    'Каталог'=> 'Catalog',
+    'Портал'=>'Portal',
 ];
