@@ -55,6 +55,18 @@ use vova07\imperavi\Widget as imperavi;
                 'options' =>['placeholder'=>Yii::t('app','Обо мне')],
             ])->label(false); ?>
 
+            <?=$form->field($model,'name', [
+                'showLabels' => false,
+                'addon' => [
+                    'prepend' => [
+                        'content' => '<i class="fa fa-user fa-lg" aria-hidden="true"></i>'
+                    ],
+                ]
+            ])
+                ->textInput(['placeholder' => Yii::t('app', 'Имя пользователя')])
+            //        ->label(null);
+            ?>
+
 
             <?=$form->field($model,'vk', [
                 'showLabels' => false,
@@ -80,7 +92,7 @@ use vova07\imperavi\Widget as imperavi;
             //        ->label(null);
             ?>
 
-            <?=$form->field($model,'facebook', [
+            <?=$form->field($model,'instagram', [
                 'showLabels' => false,
                 'addon' => [
                     'prepend' => [

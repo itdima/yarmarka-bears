@@ -344,6 +344,10 @@ h1, h2, h3 {
 }
 
 .panel-body{
+   --padding-bottom: 0px;
+}
+
+.non-bottom{
     padding-bottom: 0px;
 }
 
@@ -506,4 +510,9 @@ div.thumbnail.shadow:after
     cursor: default;
     background-color: #d7cdb4;
     border-color: #d7cdb4;
+}
+/*============================ Каталог =======================*/
+.signer{
+    font-family: 'Teddy', arial;
+    font-size: 18px;
 }

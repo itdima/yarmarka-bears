@@ -83,9 +83,9 @@ class Crafts extends commonModel
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser0()
+    public function getUserProfile()
     {
-        return $this->hasOne(BearsUserProfile::className(), ['id_user' => 'user']);
+        return $this->hasOne(UserProfile::className(), ['id_user' => 'user']);
     }
 
 

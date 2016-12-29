@@ -51,6 +51,7 @@ return [
     'Сообщения'=>'Messages',
     'Ссылка на страницу'=>'Link to',
     'Новое'=>'New',
+    'Имя пользователя'=>'User name',
     //Ошибки и сообщения
     'Введенные пароли должны совпадать'=>'Repeat password must be repeated exactly.',
     'Сохранено успешно'=>'Save complete',

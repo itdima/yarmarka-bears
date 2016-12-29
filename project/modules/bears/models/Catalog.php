@@ -52,7 +52,6 @@ class Catalog extends commonModel
                     $q->andFilterWhere(['like', 'tagname', $this->tag]);
                 }
             ]);
-
         }
         return $query;
 

@@ -1,7 +1,10 @@
 <?php
 namespace app\modules\bears\controllers\catalog;
 
+use app\models\Country;
+use app\modules\bears\models\UserProfile;
 use Yii;
+use app\modules\bears\models\Crafts;
 
 
 
@@ -50,5 +53,40 @@ class MainController extends \app\modules\bears\controllers\CommonController
             ->limit($pages->limit)
             ->all();
         return $this->render('index', ['models' => $models,  'pages' => $pages, 'searchModel' => $searchModel]);
+    }
+
+    public function actionShowCraft($item){
+        $model = $this->findCraft($item);
+        return $this->render('show-craft',['model'=>$model]);
+    }
+
+    public function actionShowUser($item){
+        $model = $this->findUser($item);
+        $country = $this->getCountry($model->country);
+        return $this->render('show-user',['model'=>$model,'country'=>$country]);
+    }
+
+    protected function getCountry($user_lang){
+        $name_lang = 'name_' . Yii::$app->language;
+        $country = Country::find()->select([$name_lang])->where('alpha = :alpha',[':alpha'=>$user_lang])->one();
+        return $country[$name_lang];
+    }
+
+    protected function findCraft($id)
+    {
+        if (($model = Crafts::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    protected function findUser($id)
+    {
+        if (($model = UserProfile::find()->where('id_user = :id',[':id'=>$id])->one()) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }
