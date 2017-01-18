@@ -104,6 +104,10 @@ class UserProfile extends commonModel
         return $profile;
     }
 
+    public function getCrafts(){
+       return Crafts::find()->where('user = :user',[':user'=>$this->id_user])->all();
+    }
+
 
 
 

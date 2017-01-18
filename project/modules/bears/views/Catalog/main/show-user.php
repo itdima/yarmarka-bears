@@ -41,6 +41,57 @@ use \kartik\icons\Icon;
                     <a href="<?= $model->instagram ?>"><i class="fa fa-instagram fa-md" aria-hidden="true"></i></a>
                 </p>
                 <?= $model->about ?>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p><?= Yii::t('app', 'Работы') ?></p>
+                <?php
+                $arr_img = [];
+                foreach ($model->getCrafts() as $craft) {
+                    foreach ($craft->getImages() as $img) {
+                        $arr_img[] = '<a href="' . \yii\helpers\Url::toRoute(['show-craft', 'item' => $craft->id]) . '" style="outline: none;"><img src="' . $img->getUrl('x200px') . '" class="thumbnail" ></a>';
+                        //echo '<img bbb='.$craft->id.' src="' . $img->getUrl('') . '" >';
+                    }
+                }
+                echo \evgeniyrru\yii2slick\Slick::widget([
+                    // HTML tag for container. Div is default.
+                    'itemContainer' => 'div',
+                    // HTML attributes for widget container
+                    'containerOptions' => ['class' => ''],
+                    // Items for carousel. Empty array not allowed, exception will be throw, if empty
+                    'items' => $arr_img,
+                    // HTML attribute for every carousel item
+                    'itemOptions' => ['style' => 'outline: none; margin: 0px 20px;'],
+                    // settings for js plugin
+                    // @see http://kenwheeler.github.io/slick/#settings
+                    'clientOptions' => [
+                        'autoplay' => true,
+                        'dots' => false,
+                        'slidesToShow' => 3,
+                        'slidesToScroll' => 3,
+                        'speed' => 500,
+                        'infinite' => false,
+                        'variableWidth' => true,
+                        'responsive' => [
+                            [
+                                'breakpoint' => 560,
+                                'settings' => [
+                                    'slidesToShow' => 1,
+                                    'slidesToScroll' => 1,
+                                    'autoplay' => true,
+                                ],
+                            ],
+                        ],
+                        // note, that for params passing function you should use JsExpression object
+                        // 'onAfterChange' => new \yii\web\JsExpression('function() {}'),
+                    ],
+
+                ]);
+
+
+                ?>
 
 
             </div>
@@ -48,3 +99,5 @@ use \kartik\icons\Icon;
 
     </div>
 </div>
+
+

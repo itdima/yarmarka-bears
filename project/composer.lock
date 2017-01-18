@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3a56450e46c05175dc94d8ea813bd533",
-    "content-hash": "5564069bd90e60372baf661acfaca1f9",
+    "hash": "72db9d19b97c6bbde0e7b5b160245742",
+    "content-hash": "2d2270e468f893298d93d8134729d5d1",
     "packages": [
         {
             "name": "abeautifulsite/simpleimage",
@@ -255,6 +255,51 @@
             }
         },
         {
+            "name": "bower-asset/slick-carousel",
+            "version": "1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kenwheeler/slick.git",
+                "reference": "0aee9fe00e440cc9d72c2dc11768ad9277880603"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kenwheeler/slick/zipball/0aee9fe00e440cc9d72c2dc11768ad9277880603",
+                "reference": "0aee9fe00e440cc9d72c2dc11768ad9277880603",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.7"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "slick/slick.js",
+                    "slick/slick.css",
+                    "slick/slick.less",
+                    "slick/slick.scss"
+                ],
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests",
+                    "package.json",
+                    "index.html"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "the last carousel you'll ever need",
+            "keywords": [
+                "carousel",
+                "jquery",
+                "responsive"
+            ]
+        },
+        {
             "name": "bower-asset/yii2-pjax",
             "version": "v2.0.5",
             "source": {
@@ -438,6 +483,91 @@
                 "yii2-images"
             ],
             "time": "2014-10-27 15:14:55"
+        },
+        {
+            "name": "drmabuse/yii2-slick-carousel",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:brewing/yii2-slick.git",
+                "reference": "40a35e796572e0acd2b1eaec879b5412f4e12533"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/brewing/yii2-slick/zipball/40a35e796572e0acd2b1eaec879b5412f4e12533",
+                "reference": "40a35e796572e0acd2b1eaec879b5412f4e12533",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/slick-carousel": "@stable"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "drmabuse\\slick\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pascal Brewing",
+                    "email": "pascalbrewing@gmail.com"
+                }
+            ],
+            "description": "the last carousel you'll ever need",
+            "keywords": [
+                "extension",
+                "js-carousel",
+                "responsive",
+                "yii2"
+            ],
+            "time": "2015-03-15 12:35:29"
+        },
+        {
+            "name": "evgeniyrru/yii2-slick",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/EvgeniyRRU/yii2-slick.git",
+                "reference": "cc49cc2c7fdcb968fad7cb011ca7a484c6b500ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/EvgeniyRRU/yii2-slick/zipball/cc49cc2c7fdcb968fad7cb011ca7a484c6b500ee",
+                "reference": "cc49cc2c7fdcb968fad7cb011ca7a484c6b500ee",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/slick-carousel": "*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "evgeniyrru\\yii2slick\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Evgeniy Chernyshev",
+                    "email": "EvgeniyRRU@gmail.com"
+                }
+            ],
+            "description": "Yii2 extension for Slick Carousel",
+            "keywords": [
+                "carousel",
+                "extension",
+                "widget",
+                "yii"
+            ],
+            "time": "2015-02-16 21:56:58"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -2344,7 +2474,8 @@
     "stability-flags": {
         "kartik-v/yii2-widget-fileinput": 20,
         "kartik-v/yii2-widget-datepicker": 20,
-        "hyii2/yii2-avatar": 20
+        "hyii2/yii2-avatar": 20,
+        "drmabuse/yii2-slick-carousel": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

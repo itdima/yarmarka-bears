@@ -33,7 +33,9 @@
         "vova07/yii2-fileapi-widget": "0.1.8",
         "vova07/yii2-imperavi-widget": "1.2.10",
         "kartik-v/yii2-widget-datepicker": "1.4.x-dev",
-        "hyii2/yii2-avatar": "dev-master"
+        "hyii2/yii2-avatar": "dev-master",
+        "drmabuse/yii2-slick-carousel": "dev-master",
+        "evgeniyrru/yii2-slick": "1.0.0"
 
 
 

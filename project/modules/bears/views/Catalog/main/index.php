@@ -27,7 +27,7 @@ use yii\helpers\Html;
                         'version' => '4.5.2',
                         'options' => [
                             // 'nav' => 'thumbs',
-                            'allowfullscreen' => 'true',
+                           // 'allowfullscreen' => 'true',
                             'fit' => 'scaledown',
                             'hash' => 'true',
                             'keyboard' => 'true',
